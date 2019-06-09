@@ -1,0 +1,64 @@
+{
+  "yellowcards": [
+    {
+      "cardCaption": "Ice cream with friends",
+      "cardAmount": 3
+    },
+    {
+      "cardCaption": "A trip to see the latest movie in the cinema",
+      "cardAmount": 9
+    },
+    {
+      "cardCaption": "You won’t stop growing! Time to go shopping",
+      "cardAmount": 30
+    },
+    {
+      "cardCaption": "You’re going to a theme park for the day",
+      "cardAmount": 45
+    },
+    {
+      "cardCaption": "You just bought the latest video game",
+      "cardAmount": 60
+    },
+    {
+      "cardCaption": "You buy a gift for your friend’s birthday",
+      "cardAmount": 15
+    },
+    {
+      "cardCaption": "You are taking some swimming lessons",
+      "cardAmount": 20
+    },
+    {
+      "cardCaption": "Dinner in a fancy restaurant - you deserve it!",
+      "cardAmount": 50
+    },
+    {
+      "cardCaption": "You wanted a new bike",
+      "cardAmount": 70
+    },
+    {
+      "cardCaption": "Time to relax in a spa for the weekend",
+      "cardAmount": 75
+    },
+    {
+      "cardCaption": "You are going to see your favourite soccer team play",
+      "cardAmount": 85
+    },
+    {
+      "cardCaption": "Cosy Friday night with pizza and friends",
+      "cardAmount": 6
+    },
+    {
+      "cardCaption": "Halloween is coming and you need the best costume",
+      "cardAmount": 17
+    },
+    {
+      "cardCaption": "A day out with friends to go ice skating",
+      "cardAmount": 11
+    },
+    {
+      "cardCaption": "Treating yourself to some sweets after school",
+      "cardAmount": 3
+    }
+  ]
+}

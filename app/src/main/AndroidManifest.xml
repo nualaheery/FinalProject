@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.finalproject">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ViewRemovedCards"></activity>
+        <activity android:name=".ChangePinNumberNew" />
+        <activity android:name=".PinNumberOld" />
+        <activity android:name=".PinNumber" />
+        <activity android:name=".MonsterDetails" />
+        <activity android:name=".InsertGreenCard" />
+        <activity android:name=".InsertBlueCard" />
+        <activity android:name=".InsertYellowCard" />
+        <activity android:name=".InsertRedCard" />
+        <activity android:name=".GreenCards" />
+        <activity android:name=".BlueCards" />
+        <activity android:name=".YellowCards" />
+        <activity android:name=".RedCards" />
+        <activity android:name=".AddPlayingCards" />
+        <activity android:name=".PlayingCards" />
+        <activity android:name=".CharactersRecycView" />
+        <activity android:name=".Questions" />
+        <activity android:name=".TeacherHome" />
+        <activity android:name=".ChooseCharacter2" />
+        <activity android:name=".ChooseCharacter" />
+        <activity
+            android:name=".GamePlayActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".GameSetUp" />
+        <activity android:name=".PupilHome" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

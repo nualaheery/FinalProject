@@ -1,0 +1,64 @@
+{
+  "greencards": [
+    {
+      "cardCaption": "You walked the neighbour’s dog for a week",
+      "cardAmount": 30
+    },
+    {
+      "cardCaption": "Your friend finally paid back the money they owe you",
+      "cardAmount": 35
+    },
+    {
+      "cardCaption": "You returned a coat for a refund",
+      "cardAmount": 49
+    },
+    {
+      "cardCaption": "You sold some old jewellery",
+      "cardAmount": 40
+    },
+    {
+      "cardCaption": "HAPPY BIRTHDAY!!!",
+      "cardAmount": 55
+    },
+    {
+      "cardCaption": "Wow you’re clever, you just won a spelling bee",
+      "cardAmount": 20
+    },
+    {
+      "cardCaption": "You won a singing contest",
+      "cardAmount": 25
+    },
+    {
+      "cardCaption": "You cut the grass at home",
+      "cardAmount": 10
+    },
+    {
+      "cardCaption": "Congratulations, you passed a test",
+      "cardAmount": 20
+    },
+    {
+      "cardCaption": "You delivered newspapers for a week. Hard work!",
+      "cardAmount": 30
+    },
+    {
+      "cardCaption": "You buy your tutor a 'thank you' gift",
+      "cardAmount": 15
+    },
+    {
+      "cardCaption": "Babysitting on a Saturday night",
+      "cardAmount": 15
+    },
+    {
+      "cardCaption": "Finally, you tidied your room",
+      "cardAmount": 15
+    },
+    {
+      "cardCaption": "You took some old things to a car boot sale",
+      "cardAmount": 28
+    },
+    {
+      "cardCaption": "You sold some delicious cookies",
+      "cardAmount": 25
+    }
+  ]
+}

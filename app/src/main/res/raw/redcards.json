@@ -1,0 +1,64 @@
+{
+  "redcards": [
+    {
+      "cardCaption": "It’s that time of the week – grocery shopping!",
+      "cardAmount": 42
+    },
+    {
+      "cardCaption": "You’re organising a party. Time to buy some supplies!",
+      "cardAmount": 35
+    },
+    {
+      "cardCaption": "Your monthly phone bill",
+      "cardAmount": 30
+    },
+    {
+      "cardCaption": "Cars don’t work without petrol, fill up the car!",
+      "cardAmount": 55
+    },
+    {
+      "cardCaption": "Time to get fit with a gym membership",
+      "cardAmount": 18
+    },
+    {
+      "cardCaption": "Don’t forget to turn the lights off – electricity bill!",
+      "cardAmount": 40
+    },
+    {
+      "cardCaption": "You decided to try out a monthly train ticket",
+      "cardAmount": 22
+    },
+    {
+      "cardCaption": "Guitar lessons. You’re getting pretty good!",
+      "cardAmount": 20
+    },
+    {
+      "cardCaption": "You're going on a school trip",
+      "cardAmount": 8
+    },
+    {
+      "cardCaption": "All your favourite TV shows aren’t free - Netflix bill",
+      "cardAmount": 9
+    },
+    {
+      "cardCaption": "Entry fee for your new club",
+      "cardAmount": 17
+    },
+    {
+      "cardCaption": "Your music downloads",
+      "cardAmount": 6
+    },
+    {
+      "cardCaption": "Subscription fee for your favourite magazine",
+      "cardAmount": 4
+    },
+    {
+      "cardCaption": "Another bill...",
+      "cardAmount": 33
+    },
+    {
+      "cardCaption": "final bill...",
+      "cardAmount": 22
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "monsters": [
+    {
+      "name": "Monster 1",
+      "image_name": "monster1",
+      "debit_card_number": "7693 2039 5098 2203",
+      "credit_card_number": "9829 2930 9212 2932"
+    },
+    {
+      "name": "Monster 2",
+      "image_name": "monster2",
+      "debit_card_number": "4019 2939 2043 1192",
+      "credit_card_number": "5482 1029 2039 4022"
+    },
+    {
+      "name": "Monster 3",
+      "image_name": "monster3",
+      "debit_card_number": "6830 2039 5672 0193",
+      "credit_card_number": "8374 2019 3948 3203"
+    },
+    {
+      "name": "Monster 4",
+      "image_name": "monster4",
+      "debit_card_number": "3921 2930 1093 2034",
+      "credit_card_number": "5492 2039 2305 0293"
+    },
+    {
+      "name": "Monster 5",
+      "image_name": "monster5",
+      "debit_card_number": "9302 1029 2012 3042",
+      "credit_card_number": "3943 2930 4598 2201"
+    },
+    {
+      "name": "Monster 6",
+      "image_name": "monster6",
+      "debit_card_number": "3920 4029 1920 4021",
+      "credit_card_number": "3494 1093 2010 3042"
+    },
+    {
+      "name": "Monster 7",
+      "image_name": "monster7",
+      "debit_card_number": "9382 1002 3049 1923",
+      "credit_card_number": "8530 1093 1928 9984"
+    },
+    {
+      "name": "Monster 8",
+      "image_name": "monster8",
+      "debit_card_number": "4839 5032 2049 2039",
+      "credit_card_number": "8403 2039 2748 5067"
+    }
+  ]
+}

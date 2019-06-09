@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context=".ChangePinNumber"
+    android:clickable="true">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.alimuzaffar.lib.pin.PinEntryEditText
+        android:id="@+id/pinEditText"
+        android:layout_width="431dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="32dp"
+        android:cursorVisible="false"
+        android:digits="1234567890"
+        android:inputType="numberPassword"
+        android:maxLength="4"
+        android:textIsSelectable="false"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:pinAnimationType="popIn"
+        app:pinBackgroundIsSquare="true"
+        app:pinLineColors="@android:color/black" />
+
+    <com.alimuzaffar.lib.pin.PinEntryEditText
+        android:id="@+id/pinConfirmEditText"
+        android:layout_width="0dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="83dp"
+        android:layout_marginTop="308dp"
+        android:layout_marginEnd="83dp"
+        android:cursorVisible="false"
+        android:digits="1234567890"
+        android:inputType="numberPassword"
+        android:maxLength="4"
+        android:textIsSelectable="false"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:pinAnimationType="popIn"
+        app:pinBackgroundIsSquare="true"
+        app:pinLineColors="@android:color/black" />
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="408dp"
+        android:text="@string/submit_pin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pinEditText"
+        app:layout_constraintVertical_bias="0.996" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="330dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/enter_new_pin_number"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="330dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="264dp"
+        android:text="@string/confirm_pin_number"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+</android.support.constraint.ConstraintLayout>

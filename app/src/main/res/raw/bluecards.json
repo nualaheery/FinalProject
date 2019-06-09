@@ -1,0 +1,64 @@
+{
+  "bluecards": [
+    {
+      "cardCaption": "Oh no, your pet is sick. A trip to the vet",
+      "cardAmount": 40
+    },
+    {
+      "cardCaption": "Your bike bas broken, you need to get it fixed",
+      "cardAmount": 55
+    },
+    {
+      "cardCaption": "Your computer has a virus which needs fixed",
+      "cardAmount": 32
+    },
+    {
+      "cardCaption": "You smashed the screen on your phone",
+      "cardAmount": 45
+    },
+    {
+      "cardCaption": "Unexpected party tomorrow - of course you’re going!",
+      "cardAmount": 25
+    },
+    {
+      "cardCaption": "You buy a gift for your friend’s birthday",
+      "cardAmount": 15
+    },
+    {
+      "cardCaption": "You chipped a tooth - ouch!",
+      "cardAmount": 27
+    },
+    {
+      "cardCaption": "You went for an eye test and found out you need glasses",
+      "cardAmount": 59
+    },
+    {
+      "cardCaption": "You caught the flu and need some tablets",
+      "cardAmount": 6
+    },
+    {
+      "cardCaption": " You lost your library book and now have a fine",
+      "cardAmount": 4
+    },
+    {
+      "cardCaption": "You buy your tutor a 'thank you' gift",
+      "cardAmount": 15
+    },
+    {
+      "cardCaption": "Too lazy to cook so you get a take away",
+      "cardAmount": 8
+    },
+    {
+      "cardCaption": "Parking fine. Yellow lines mean no parking!",
+      "cardAmount": 30
+    },
+    {
+      "cardCaption": "You’ve went over your phone contract this month, oops!",
+      "cardAmount": 8
+    },
+    {
+      "cardCaption": "New training kit",
+      "cardAmount": 25
+    }
+  ]
+}

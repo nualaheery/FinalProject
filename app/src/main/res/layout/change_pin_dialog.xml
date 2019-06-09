@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    tools:context=".ChangePinNumber">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.alimuzaffar.lib.pin.PinEntryEditText
+        android:id="@+id/pinDebitChangeEditText"
+        android:layout_width="431dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="32dp"
+        android:cursorVisible="false"
+        android:digits="1234567890"
+        android:gravity="center"
+        android:inputType="numberPassword"
+        android:maxLength="4"
+        android:textIsSelectable="false"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.584"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:pinAnimationType="popIn"
+        app:pinBackgroundIsSquare="true"
+        app:pinLineColors="@android:color/black" />
+
+    <com.alimuzaffar.lib.pin.PinEntryEditText
+        android:id="@+id/pinDebitChangeConfirmEditText"
+        android:layout_width="431dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="184dp"
+        android:layout_marginEnd="32dp"
+        android:cursorVisible="false"
+        android:digits="1234567890"
+        android:gravity="center"
+        android:inputType="numberPassword"
+        android:maxLength="4"
+        android:textIsSelectable="false"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.584"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:pinAnimationType="popIn"
+        app:pinBackgroundIsSquare="true"
+        app:pinLineColors="@android:color/black" />
+
+
+</android.support.constraint.ConstraintLayout>

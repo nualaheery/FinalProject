@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InstructionsFragment"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:layout_gravity="center"
+    android:background="@drawable/gradient"
+    android:clickable="true"
+
+    >
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="How To Play"
+        android:textSize="50sp"
+        android:textAlignment="center"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1. Choose a character for the game"
+                android:textSize="30sp"
+                android:padding="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2. You will be given a random pin for your cards.  Keep this pin or create your own pin"
+                android:textSize="30sp"
+                android:padding="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3. You must remember your pin and use it every time you need to make a payment"
+                android:textSize="30sp"
+                android:padding="16dp"/>
+
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="4. If you forget your pin, you can retrieve it but you will miss a turn"
+            android:textSize="30sp"
+            android:padding="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5. Players start the game with a set amount of money, and a credit of zero"
+                android:textSize="30sp"
+                android:padding="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="6. On their turn, players will roll the virtual die and move that many spaces around the board"
+                android:textSize="30sp"
+                android:padding="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="7. The player must choose the same colour of card as the space they landed on"
+                android:textSize="30sp"
+                android:padding="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="8. Each card has an expenditure and an amount of money that must be paid"
+                android:textSize="30sp"
+                android:padding="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="9. Red cards represent bills, yellow cards represent luxeries and blue cards represent typical life events"
+                android:textSize="30sp"
+                android:padding="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="10. Green cards are different.  Green cards represent times when the player recevies money."
+                android:textSize="30sp"
+                android:padding="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="11. When a player picks an expenditure card, they must choose whether to pay with their debit or credit card.  They select the card, enter their pin and the money is deducted."
+                android:textSize="30sp"
+                android:padding="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="12. Only one player has a turn at a time, rolling the die and selecting cards on their own individual device."
+                android:textSize="30sp"
+                android:padding="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="13. The game continues until each player reaches the end of the board, and the player with the most amount of money left is the winner."
+                android:textSize="30sp"
+                android:padding="16dp"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

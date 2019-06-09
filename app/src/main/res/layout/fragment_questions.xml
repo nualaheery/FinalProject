@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuestionsFragment"
+    android:background="@drawable/gradient">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Post a question to the class"
+        android:textSize="40sp"
+        android:textColor="@android:color/white"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewQuestions"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginBottom="100dp"
+        android:background="@android:color/darker_gray"
+        android:padding="4dp"
+        />
+
+    <EditText
+        android:id="@+id/addQuestionText"
+        android:layout_width="243dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="23dp"
+        android:hint="Enter A Question" />
+
+    <Button
+        android:id="@+id/addQuestionBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/addQuestionText"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="-2dp"
+        android:layout_toEndOf="@+id/addQuestionText"
+        android:text="Add Question" />
+
+    <Button
+        android:id="@+id/saveBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/addQuestionText"
+        android:layout_marginStart="237dp"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@+id/addQuestionText"
+        android:text="Save" />
+
+
+</RelativeLayout>

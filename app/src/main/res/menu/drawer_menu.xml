@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_debitcard"
+            android:icon="@drawable/credit_card_basic"
+            android:title="@string/debit_card" />
+
+        <item android:id="@+id/nav_creditcard"
+            android:icon="@drawable/credit_card_basic"
+            android:title="@string/credit_card" />
+        <item android:id="@+id/nav_cash"
+            android:icon="@drawable/credit_card_basic"
+            android:title="cash" />
+    </group>
+
+    <item android:title="@string/get_help">
+        <menu>
+            <item android:id="@+id/nav_askforadvice"
+                android:icon="@drawable/pupils_icon"
+                android:title="@string/ask_for_advice" />
+            <item android:id="@+id/nav_askforhelp"
+                android:icon="@drawable/teacher_icon"
+                android:title="@string/ask_for_help" />
+
+        </menu>
+
+    </item>
+
+
+</menu>

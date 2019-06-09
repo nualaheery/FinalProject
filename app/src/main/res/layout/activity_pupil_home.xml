@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/gradient"
+    android:id="@+id/fragment_container_home"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="32dp"
+
+            >
+
+            <ImageView
+                android:layout_width="62dp"
+                android:layout_height="62dp"
+                android:src="@drawable/cards_icon"
+                android:layout_alignParentRight="true"
+                />
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32sp"
+                android:textColor="#FFFFFF"
+                android:text="Game title..."
+                />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_gravity="center"
+            android:columnOrderPreserved="false"
+            android:alignmentMode="alignMargins"
+            android:rowCount="2"
+            android:columnCount="2"
+
+            >
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/startGameCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="12dp"
+
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="32dp"
+                    android:orientation="vertical"
+                    android:background="#D6D4D4">
+
+                    <ImageView
+                        android:id="@+id/teacherImg"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/start_icon"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/start_game"
+                        android:textAlignment="center"
+                        android:textSize="24sp"
+                        android:textColor="#000000"
+
+                        />
+
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/howToPlayCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                app:cardElevation="60dp"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="12dp"
+                android:onClick="goToPupilSite"
+
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="32dp"
+                    android:orientation="vertical"
+                    android:background="#D6D4D4">
+
+                    <ImageView
+                        android:id="@+id/pupilImg"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/rulebook"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Rules"
+                        android:textAlignment="center"
+                        android:textSize="24sp"
+                        android:textColor="#000000"
+                        />
+
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+        </GridLayout>
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>
