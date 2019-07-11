@@ -27,8 +27,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToTeacherSite(View v) {
-        Intent intent = new Intent(this, TeacherHome.class);
-        startActivity(intent);
+      /*  Intent intent = new Intent(this, TeacherHome.class);
+        startActivity(intent); */
+
+      TeacherSiteEntryPin teacherSiteEntryPin = new TeacherSiteEntryPin();
+        teacherSiteEntryPin.show(getSupportFragmentManager(),null);
     }
 
     public void goToPupilSite(View v) {

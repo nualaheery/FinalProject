@@ -2,9 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.finalproject">
 
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -14,9 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewRemovedCards"></activity>
-        <activity android:name=".ChangePinNumberNew" />
-        <activity android:name=".PinNumberOld" />
+        <activity android:name=".GameEndedActivity"></activity>
+        <activity android:name=".ViewRemovedCards" />
+        <activity android:name=".ChangePinNumber" />
+        <activity android:name=".PinNumber" />
         <activity android:name=".PinNumber" />
         <activity android:name=".MonsterDetails" />
         <activity android:name=".InsertGreenCard" />

@@ -1,84 +1,41 @@
 package com.example.finalproject;
 
-
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.alimuzaffar.lib.pin.PinEntryEditText;
 
+public class ChangePinNumber extends AppCompatActivity {
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class ChangePinNumber extends Fragment {
-
-    PinEntryEditText pinEditText;
-    PinEntryEditText pinConfirmEditText;
-    Button submitBtn;
-
-    public ChangePinNumber() {
-        // Required empty public constructor
-    }
-
+    private PinEntryEditText pinEditText;
+    private PinEntryEditText pinConfirmEditText;
+    private Button submitBtn;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_change_pin_number, container, false);
-        pinEditText = view.findViewById(R.id.pinEditText);
-        pinConfirmEditText = view.findViewById(R.id.pinConfirmEditText);
-        submitBtn = view.findViewById(R.id.submitBtn);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_change_pin_number_new);
+
+        pinEditText = findViewById(R.id.pinEditText2);
+        pinConfirmEditText = findViewById(R.id.pinConfirmEditText2);
+        submitBtn = findViewById(R.id.submitBtn2);
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (pinEditText.getText().toString().equals(pinConfirmEditText.getText().toString())) {
-                    Toast.makeText(getActivity(), "Pins Match!",Toast.LENGTH_SHORT).show();
+                if ((pinEditText.getText().toString().equals(pinConfirmEditText.getText().toString())) && (pinEditText.getText().toString() != null
+                        && pinConfirmEditText.getText().toString() != null)) {
+                    Intent intent = new Intent (ChangePinNumber.this, GamePlayActivity.class);
+                    intent.putExtra("chosenpin", pinEditText.getText().toString());
+                    startActivity(intent);
                 } else {
-                    Toast.makeText(getActivity(), "Pins do not match, try again!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChangePinNumber.this, "Pins do not match, try again!",Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-
-
-
-     /*   pinEditText.setPinViewEventListener(new Pinview.PinViewEventListener() {
-            @Override
-            public void onDataEntered(Pinview pinview, boolean fromUser) {
-                Toast.makeText(getActivity(), ""+pinview.getValue(), Toast.LENGTH_SHORT).show();
-            }
-        }); */
-
-
-      /*  if (pinEditText != null) {
-            pinEditText.setOnPinEnteredListener(new PinEntryEditText.OnPinEnteredListener() {
-                @Override
-                public void onPinEntered(CharSequence str) {
-
-
-              /*      if (str.toString().equals(1234)) {
-                        Toast.makeText(getActivity(), "SUCCESS", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getActivity(), "FAIL", Toast.LENGTH_SHORT).show();
-                        pinEditText.setText(null);
-
-                    }
-
-                }
-            });
-        } */
-
-
-
-        return view;
     }
-
 }

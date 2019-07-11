@@ -8,14 +8,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.Locale;
 import java.util.Random;
 
 public class MonsterDetails extends AppCompatActivity {
-
-    //when the Intent is up here, i get a NullPointerException - how can i pass the MonsterItem onto the next activtiy??
 
     public static MonsterItem monsterItem;
 
@@ -59,8 +55,7 @@ public class MonsterDetails extends AppCompatActivity {
     }
 
     private void goToPinNumber() {
-        Intent intent = new Intent(MonsterDetails.this, PinNumberOld.class);
-      //  intent.putExtra("monsteritem", monsterItem);
+        Intent intent = new Intent(MonsterDetails.this, PinNumber.class);
         Random random = new Random();
         String pin = String.format(Locale.getDefault(),"%04d", random.nextInt(10000));
         intent.putExtra("pinNumber",pin);

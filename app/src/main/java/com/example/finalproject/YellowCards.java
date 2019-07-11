@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -32,6 +34,7 @@ public class YellowCards extends AppCompatActivity implements YellowCardAdapter.
     private YellowCardAdapter mYellowCardAdapter;
     private ArrayList<PlayingCard> mCardList;
     private RequestQueue mRequestQueue;
+    private Activity mActivity = YellowCards.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,5 +129,10 @@ public class YellowCards extends AppCompatActivity implements YellowCardAdapter.
         };
         mYellowCardAdapter.notifyItemRemoved(position);
         mRequestQueue.add(request);
+
+        Toast.makeText(mActivity, "Card removed", Toast.LENGTH_SHORT).show();
+      //  mActivity.recreate();
+
+     //   mCardList.clear();
     }
 }

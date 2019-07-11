@@ -4,6 +4,7 @@ public class Square {
 
     private int squareNumber;
     private String squareColour;
+    private int withdrawalAmount;
 
     public Square() {
     }
@@ -11,6 +12,18 @@ public class Square {
     public Square(int squareNumber, String squareColour) {
         this.squareNumber = squareNumber;
         this.squareColour = squareColour;
+    }
+
+    public Square(int squareNumber, String squareColour, int withdrawalAmount) {
+        this.squareNumber = squareNumber;
+        this.squareColour = squareColour;
+        this.withdrawalAmount = withdrawalAmount;
+    }
+
+    public int getWithdrawalAmount() { return withdrawalAmount;}
+
+    public void setWithdrawalAmount(int withdrawalAmount) {
+        this.withdrawalAmount = withdrawalAmount;
     }
 
     public int getSquareNumber() {

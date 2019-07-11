@@ -16,15 +16,19 @@
             android:title="cash" />
     </group>
 
-    <item android:title="@string/get_help">
+    <item android:title="@string/credit_information">
         <menu>
-            <item android:id="@+id/nav_askforadvice"
-                android:icon="@drawable/pupils_icon"
-                android:title="@string/ask_for_advice" />
-            <item android:id="@+id/nav_askforhelp"
-                android:icon="@drawable/teacher_icon"
-                android:title="@string/ask_for_help" />
+            <item android:id="@+id/nav_interestinfo"
+                android:icon="@drawable/credit_card_basic"
+                android:title="Interest" />
 
+            <item android:id="@+id/nav_repaycreditwithdebit"
+                android:icon="@drawable/credit_card_basic"
+                android:title="Pay off credit from debit" />
+
+            <item android:id="@+id/nav_repaycreditwithcash"
+                android:icon="@drawable/credit_card_basic"
+                android:title="Pay off credit with cash" />
         </menu>
 
     </item>

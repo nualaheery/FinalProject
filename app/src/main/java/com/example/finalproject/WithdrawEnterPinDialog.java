@@ -13,13 +13,14 @@ import android.widget.Toast;
 
 import com.alimuzaffar.lib.pin.PinEntryEditText;
 
-public class DebitEnterPinDialog extends AppCompatDialogFragment {
+public class WithdrawEnterPinDialog extends AppCompatDialogFragment {
 
-    public static final int MAX_LOGIN_ATTEMPT = 2;
     private PinEntryEditText pinDebitEntryText;
     private Player player = GamePlayActivity.player;
     private int amount = GamePlayActivity.amount;
     private int loginAttempt;
+    public static final int MAX_LOGIN_ATTEMPT = 2;
+    GamePlayActivity mActivity;
 
 
     @Override
@@ -35,24 +36,24 @@ public class DebitEnterPinDialog extends AppCompatDialogFragment {
 
 
 
-            builder.setView(view)
-                    .setTitle("Enter Your Pin")
-                    .setMessage("Make sure you enter the correct pin")
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            GamePlayActivity.paid = false;
-                        }
-                    })
-                    .setPositiveButton("Enter", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    }).setNeutralButton("Forgot Pin", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                }
-            });
+        builder.setView(view)
+                .setTitle("Enter Your Pin")
+                .setMessage("Make sure you enter the correct pin")
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        GamePlayActivity.paid = false;
+                    }
+                })
+                .setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                }).setNeutralButton("Forgot Pin", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
 
 
 
@@ -74,36 +75,35 @@ public class DebitEnterPinDialog extends AppCompatDialogFragment {
                     Boolean wantToCloseDialog = false;
                     String pinEntered = pinDebitEntryText.getText().toString();
                     String correctPin = player.getPinNumber();
-                    int amountOwed = amount;
 
+                    if (loginAttempt < MAX_LOGIN_ATTEMPT) {
+                        if (pinEntered.equals(correctPin)) {
+                            //minus withdrawal amount from debit
+                            player.setDebitAmount(player.getDebitAmount() - amount);
+                            //adding withdrawal amount to cash
+                            player.setCashAmount(player.getCashAmount() + amount);
+                            Toast.makeText(getActivity(), "Withdrawing: £" + amount, Toast.LENGTH_SHORT).show();
+                            GamePlayActivity.paid = true;
+                            Log.d("nuala", "paid boolean: " + GamePlayActivity.paid);
 
-                        if (loginAttempt < MAX_LOGIN_ATTEMPT) {
-                            if (pinEntered.equals(correctPin)) {
+                          //  mActivity.withdrawBtn.setVisibility(View.INVISIBLE);
 
-                                player.setDebitAmount(player.getDebitAmount() - amountOwed);
+                            wantToCloseDialog = true;
 
-                                Log.d("nuala", "amount paid: " + amount + "amount left: " + player.getDebitAmount());
-                                Toast.makeText(getActivity(), "Paid £" + amount, Toast.LENGTH_SHORT).show();
-                                GamePlayActivity.paid = true;
-                                Log.d("nuala", "paid boolean: " + GamePlayActivity.paid);
-
-                                wantToCloseDialog = true;
-
-                            } else {
-                                Toast.makeText(getActivity(), "Incorrect pin, try again", Toast.LENGTH_SHORT).show();
-                                loginAttempt++;
-
-                            }
                         } else {
-                            player.setPinBlocked(true);
-                            Toast.makeText(getActivity(), "Pin blocked, please create a new pin", Toast.LENGTH_LONG).show();
-                            d.dismiss();
+                            Toast.makeText(getActivity(), "Incorrect pin, try again", Toast.LENGTH_SHORT).show();
+                            loginAttempt++;
 
                         }
+                    } else {
+                        player.setPinBlocked(true);
+                        Toast.makeText(getActivity(), "Pin blocked, please create a new pin", Toast.LENGTH_LONG).show();
+                        d.dismiss();
 
+                    }
                     if (wantToCloseDialog) {
                         d.dismiss();
-                }
+                    }
                 }
             });
 
@@ -116,5 +116,4 @@ public class DebitEnterPinDialog extends AppCompatDialogFragment {
             });
         }
     }
-
 }

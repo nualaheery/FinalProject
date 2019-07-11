@@ -29,4 +29,7 @@
     <string name="game_codes">Game Codes</string>
     <string name="see_current_games">See Current Games</string>
     <string name="publish_questions">Publish Questions</string>
+    <string name="pound_sign"> £ </string>
+    <string name="textview">TextView</string>
+    <string name="credit_information">Credit Information</string>
 </resources>

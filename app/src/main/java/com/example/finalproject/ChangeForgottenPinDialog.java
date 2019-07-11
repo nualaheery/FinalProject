@@ -45,11 +45,7 @@ public class ChangeForgottenPinDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
-                }).setNeutralButton("Forgot Pin", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
+                });
 
 
 

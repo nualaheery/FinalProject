@@ -60,7 +60,8 @@ public class CreditPayEnterPin extends AppCompatDialogFragment {
         super.onResume();
         final AlertDialog d = (AlertDialog) getDialog();
         if (d != null) {
-            final Button positiveButton = (Button) d.getButton(Dialog.BUTTON_POSITIVE);
+            final Button positiveButton = d.getButton(Dialog.BUTTON_POSITIVE);
+            final Button forgotPinButton = d.getButton(Dialog.BUTTON_NEUTRAL);
             positiveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -96,6 +97,16 @@ public class CreditPayEnterPin extends AppCompatDialogFragment {
                     }
                 }
             });
+
+            forgotPinButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ChangeForgottenPinDialog changePinDialog = new ChangeForgottenPinDialog();
+                    changePinDialog.show(getActivity().getSupportFragmentManager(), "change pin dialog");
+                }
+            });
+
+
         }
 
     }

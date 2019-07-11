@@ -135,8 +135,9 @@ public class RedCards extends AppCompatActivity implements RedCardAdapter.OnItem
                     return parameters;
                 }
             };
-            mRedCardAdapter.notifyItemRemoved(position);
+
             mRequestQueue.add(request);
+        mRedCardAdapter.notifyItemRemoved(position);
     }
 }
 

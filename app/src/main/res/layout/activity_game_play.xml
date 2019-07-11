@@ -56,50 +56,53 @@
             android:id="@+id/yellowCardImg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="false"
             android:src="@drawable/yellowcard"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/greenCardImg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/redCardImg"
-            app:layout_constraintTop_toTopOf="parent"
-            android:clickable="false"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/redCardImg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="false"
             android:src="@drawable/redcard"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/blueCardImg"
             app:layout_constraintEnd_toStartOf="@+id/yellowCardImg"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:clickable="false"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/greenCardImg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="false"
             android:src="@drawable/greencard"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/blueCardImg"
-            app:layout_constraintTop_toBottomOf="@+id/yellowCardImg"
-            android:clickable="false"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/yellowCardImg" />
 
         <ImageView
             android:id="@+id/blueCardImg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="false"
             android:src="@drawable/bluecard"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/greenCardImg"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/redCardImg"
-            android:clickable="false"/>
+            app:layout_constraintTop_toBottomOf="@+id/redCardImg" />
 
         <ImageView
             android:id="@+id/diceImg"
@@ -109,6 +112,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
             android:src="@drawable/dice1"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.983"
@@ -241,11 +245,365 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="416dp"
+            android:clickable="false"
             android:text="Add money"
             android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:clickable="false"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/notEnoughToWithdrawBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="416dp"
+            android:text="Not enough funds to withdraw"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/enterPinToWithdrawBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="368dp"
+            android:text="Enter pin to withdraw cash"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/withdrawBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="464dp"
+            android:text="Complete withdrawal"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        <!-- layout for connecting devices -->
+        <Button
+            android:id="@+id/onOff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="76dp"
+            android:layout_marginTop="64dp"
+            android:text="Wifi On"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/discover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/onOff"
+            android:layout_alignBottom="@+id/onOff"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="268dp"
+            android:layout_marginTop="64dp"
+            android:text="discover"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ListView
+            android:id="@+id/peerListView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@+id/onOff"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="168dp"
+            android:layout_marginEnd="8dp"
+            android:background="@android:color/holo_orange_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/connectionStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Connection Status"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/startGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/connectionStatus"
+            android:layout_alignEnd="@+id/connectionStatus"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="596dp"
+            android:layout_marginEnd="8dp"
+            android:text="Start all games"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/connectionStatus" />
+
+        <Button
+            android:id="@+id/finishedTurn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="finished turn"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/completedBoard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="completed board"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/turnTextView"
+            android:layout_width="184dp"
+            android:layout_height="59dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="48dp"
+            android:text="Please wait for your turn"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/finishedTurn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.484"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/oneInGroupBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="416dp"
+            android:text="1"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/addMoneyBtn"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/twoInGroupBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="236dp"
+            android:layout_marginTop="416dp"
+            android:text="2"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/addMoneyBtn"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/threeInGroupBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="428dp"
+            android:layout_marginTop="416dp"
+            android:text="3"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/addMoneyBtn"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/createdAllGroupsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="488dp"
+            android:layout_marginEnd="8dp"
+            android:text="Finished Creating Groups"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/pauseBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="508dp"
+            android:text="pause"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/resumeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="256dp"
+            android:layout_marginTop="508dp"
+            android:text="resume"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/stopBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="444dp"
+            android:layout_marginTop="508dp"
+            android:text="stop"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/pauseScreen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray"
+            android:clickable="true"
+            android:text="GAME PAUSED BY TEACHER"
+            android:textSize="40sp"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="32dp" />
+
+        <TextView
+            android:id="@+id/remainingDebit"
+            android:layout_width="332dp"
+            android:layout_height="129dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="228dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="debit"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/remainingCredit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/yellowCardImg" />
+
+        <TextView
+            android:id="@+id/remainingCredit"
+            android:layout_width="334dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/remainingCash"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/remainingDebit" />
+
+
+        <TextView
+            android:id="@+id/remainingCash"
+            android:layout_width="284dp"
+            android:layout_height="127dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/totalTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/remainingCredit" />
+
+        <TextView
+            android:id="@+id/totalTextView"
+            android:layout_width="295dp"
+            android:layout_height="117dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="144dp"
+            android:gravity="center"
+            android:text="@string/textview"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/blankCard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/remainingCash" />
+
+        <TextView
+            android:id="@+id/selectPlayersTextView"
+            android:layout_width="584dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="372dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="Select how many players you'd like in a group. Create multiple groups"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/gameEndedTextView"
+            android:layout_width="591dp"
+            android:layout_height="173dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="The game has ended.  Look at your remaining amount"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="36sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>

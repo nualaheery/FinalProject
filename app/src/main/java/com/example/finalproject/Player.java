@@ -1,32 +1,23 @@
 package com.example.finalproject;
 
-import android.content.Context;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-
 public class Player {
 
     private static final int MAX_SQUARE_NUMBER = 24;
 
     private int positionOnBoard;
     private String pinNumber;
-    private int debitAmount;
-    private int creditAmount;
-    private int cashAmount;
-    private MonsterItem monster;
+    private double debitAmount;
+    private double creditAmount;
+    private double cashAmount;
     private boolean pinBlocked;
 
-    public Player() {
-    }
 
-    public Player(int positionOnBoard, String pinNumber, int debitAmount, int creditAmount, int cashAmount, MonsterItem monster, boolean pinBlocked) {
+    public Player(int positionOnBoard, String pinNumber, int debitAmount, int creditAmount, int cashAmount, boolean pinBlocked) {
         this.positionOnBoard = positionOnBoard;
         this.pinNumber = pinNumber;
         this.debitAmount = debitAmount;
         this.creditAmount = creditAmount;
         this.cashAmount = cashAmount;
-        this.monster = monster;
         this.pinBlocked = pinBlocked;
 
     }
@@ -47,32 +38,28 @@ public class Player {
         this.pinNumber = pinNumber;
     }
 
-    public int getDebitAmount() {
+    public double getDebitAmount() {
         return debitAmount;
     }
 
-    public void setDebitAmount(int debitAmount) {
+    public void setDebitAmount(double debitAmount) {
         this.debitAmount = debitAmount;
     }
 
-    public int getCreditAmount() {
+    public double getCreditAmount() {
         return creditAmount;
     }
 
-    public void setCreditAmount(int creditAmount) {
+    public void setCreditAmount(double creditAmount) {
         this.creditAmount = creditAmount;
     }
 
-    public int getCashAmount() {
+    public double getCashAmount() {
         return cashAmount;
     }
 
-    public void setCashAmount(int cashAmount) {
+    public void setCashAmount(double cashAmount) {
         this.cashAmount = cashAmount;
-    }
-
-    public MonsterItem getMonster() {
-        return monster;
     }
 
     public boolean isPinBlocked() {
@@ -83,21 +70,5 @@ public class Player {
         this.pinBlocked = pinBlocked;
     }
 
-    public void setMonsterItem () {
-        this.monster = monster;
-    }
 
-
-    public int movePosition(Context context, int diceValue, ArrayList<Square> squares) {
-
-        if ((this.positionOnBoard + diceValue) > MAX_SQUARE_NUMBER) {
-            Toast.makeText(context,"You finished the board",Toast.LENGTH_SHORT).show();
-        } else {
-            int newPosition = this.positionOnBoard += diceValue ;
-           // Toast.makeText(context,"choose a " +squares.get(this.positionOnBoard -1).getSquareColour() +"card",Toast.LENGTH_SHORT).show();
-
-        }
-
-        return this.positionOnBoard;
-    }
 }

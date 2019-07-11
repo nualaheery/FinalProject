@@ -75,9 +75,6 @@ public class CharactersRecycView extends AppCompatActivity implements RecyclerVi
 
     public void displayMonsters(String s) {
 
-        StringBuilder builder = new StringBuilder();
-        StringBuilder builder2 = new StringBuilder();
-
         try {
             JSONObject root = new JSONObject(s);
             JSONArray jsonArray = root.getJSONArray("monsters");
@@ -101,26 +98,6 @@ public class CharactersRecycView extends AppCompatActivity implements RecyclerVi
 
     @Override
     public void onItemClick(int position) {
-       /* MonsterDetailsFragment monsterDetailsFragment = new MonsterDetailsFragment();
-        MonsterItem clickedItem = monsterItems.get(position);
-
-        //change imagename to id so can pass through an int ID
-        String imageName = clickedItem.getMonsterImageResouce();
-        int imageResID = CharactersRecycView.this.getResources().getIdentifier(imageName, "drawable", CharactersRecycView.this.getPackageName());
-
-        Bundle monsterdata = new Bundle();
-        /*
-        monsterdata.putString(BUNDLE_NAME, clickedItem.getNameText());
-        monsterdata.putInt(BUNDLE_IMAGE, imageResID);
-        monsterdata.putString(BUNDLE_DEBITCARD_NUMBER,clickedItem.getDebitCardNumber());
-        monsterdata.putString(BUNDLE_CREDITCARD_NUMBER, clickedItem.getCreditCardNumber());
-
-
-
-        monsterDetailsFragment.setArguments(monsterdata);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_characters, monsterDetailsFragment, null)
-                .addToBackStack(null).commit();
-    */
 
     Intent intent = new Intent (CharactersRecycView.this, MonsterDetails.class);
     Bundle bundle = new Bundle();
