@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
@@ -76,7 +78,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         int imageResID = mContext.getResources().getIdentifier(imageName, "drawable", mContext.getPackageName());
 
         viewHolder.mMonsterName.setText(monsterName);
-        viewHolder.mImageView.setImageResource(imageResID);
+       // viewHolder.mImageView.setImageResource(imageResID);
+
+        //use the glide library instead to load the images on a seperate thread - speeds up recycler view
+        Glide.with(mContext).load(imageResID).into(viewHolder.mImageView);
 
     }
 
