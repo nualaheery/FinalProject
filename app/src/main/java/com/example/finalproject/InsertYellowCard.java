@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -43,7 +44,12 @@ public class InsertYellowCard extends AppCompatActivity {
         submitYellowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertYellowCard();
+                if ((insertAmountEditText.getText().toString().isEmpty()) || (insertAmountEditText.getText().toString().isEmpty())) {
+                    Toast.makeText(InsertYellowCard.this, "Enter all fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(InsertYellowCard.this, "Card added!", Toast.LENGTH_SHORT).show();
+                    insertYellowCard();
+                }
             }
         });
 

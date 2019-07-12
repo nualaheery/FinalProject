@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -41,7 +42,12 @@ public class InsertGreenCard extends AppCompatActivity {
         submitGreenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertGreenCard();
+                if ((insertAmountEditText.getText().toString().isEmpty()) || (insertAmountEditText.getText().toString().isEmpty())) {
+                    Toast.makeText(InsertGreenCard.this, "Enter all fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(InsertGreenCard.this, "Card added!", Toast.LENGTH_SHORT).show();
+                    insertGreenCard();
+                }
             }
         });
 

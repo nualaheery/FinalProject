@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -43,7 +44,12 @@ public class InsertRedCard extends AppCompatActivity {
         submitRedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertRedCard();
+                if ((insertAmountEditText.getText().toString().isEmpty()) || (insertAmountEditText.getText().toString().isEmpty())) {
+                    Toast.makeText(InsertRedCard.this, "Enter all fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(InsertRedCard.this, "Card added!", Toast.LENGTH_SHORT).show();
+                    insertRedCard();
+                }
             }
         });
 

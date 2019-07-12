@@ -1,10 +1,12 @@
 package com.example.finalproject;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -42,7 +44,14 @@ public class InsertBlueCard extends AppCompatActivity {
         submitBlueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertBlueCard();
+                if ((insertAmountEditText.getText().toString().isEmpty()) || (insertAmountEditText.getText().toString().isEmpty())) {
+                    Toast.makeText(InsertBlueCard.this, "Enter all fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    insertBlueCard();
+                    Toast.makeText(InsertBlueCard.this, "Card added!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(InsertBlueCard.this, BlueCards.class);
+                    startActivity(intent);
+                }
             }
         });
 
