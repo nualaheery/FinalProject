@@ -46,7 +46,7 @@ public class YellowCardAdapter extends RecyclerView.Adapter<YellowCardAdapter.Ye
         int amount = currentItem.getmAmount();
 
         yellowCardViewHolder.yellowCaptionTextView.setText(caption);
-        yellowCardViewHolder.yellowAmountTextView.setText(String.valueOf(amount));
+        yellowCardViewHolder.yellowAmountTextView.setText("£" +String.valueOf(amount));
     }
 
     @Override

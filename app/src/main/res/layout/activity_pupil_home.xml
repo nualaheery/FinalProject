@@ -10,41 +10,6 @@
     android:id="@+id/fragment_container_home"
     >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-
-        >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="32dp"
-
-            >
-
-            <ImageView
-                android:layout_width="62dp"
-                android:layout_height="62dp"
-                android:src="@drawable/cards_icon"
-                android:layout_alignParentRight="true"
-                />
-
-            <TextView
-                android:id="@+id/titleText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="32sp"
-                android:textColor="#FFFFFF"
-                android:text="Game title..."
-                />
-
-
-        </RelativeLayout>
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

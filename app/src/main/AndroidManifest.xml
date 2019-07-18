@@ -16,10 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".GameEndedActivity"></activity>
         <activity android:name=".ViewRemovedCards" />
         <activity android:name=".ChangePinNumber" />
-        <activity android:name=".PinNumber" />
         <activity android:name=".PinNumber" />
         <activity android:name=".MonsterDetails" />
         <activity android:name=".InsertGreenCard" />
@@ -33,14 +33,12 @@
         <activity android:name=".AddPlayingCards" />
         <activity android:name=".PlayingCards" />
         <activity android:name=".CharactersRecycView" />
-        <activity android:name=".Questions" />
         <activity android:name=".TeacherHome" />
-        <activity android:name=".ChooseCharacter2" />
-        <activity android:name=".ChooseCharacter" />
+
         <activity
             android:name=".GamePlayActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity android:name=".GameSetUp" />
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"/>
         <activity android:name=".PupilHome" />
         <activity android:name=".MainActivity">
             <intent-filter>

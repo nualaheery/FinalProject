@@ -45,7 +45,7 @@ public class BlueCardAdapter extends  RecyclerView.Adapter<BlueCardAdapter.BlueC
         int amount = currentItem.getmAmount();
 
         blueCardViewHolder.blueCaptionTextView.setText(caption);
-        blueCardViewHolder.blueAmountTextView.setText(String.valueOf(amount));
+        blueCardViewHolder.blueAmountTextView.setText("£" +String.valueOf(amount));
 
     }
 

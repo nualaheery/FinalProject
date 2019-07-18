@@ -48,7 +48,7 @@ public class GreenCardAdapter extends RecyclerView.Adapter<GreenCardAdapter.Gree
         int amount = currentItem.getmAmount();
 
         greenCardViewHolder.greenCaptionTextView.setText(caption);
-        greenCardViewHolder.greenAmountTextView.setText(String.valueOf(amount));
+        greenCardViewHolder.greenAmountTextView.setText("£" +String.valueOf(amount));
     }
 
     @Override

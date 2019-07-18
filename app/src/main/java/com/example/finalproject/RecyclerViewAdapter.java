@@ -80,7 +80,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         viewHolder.mMonsterName.setText(monsterName);
        // viewHolder.mImageView.setImageResource(imageResID);
 
-        //use the glide library instead to load the images on a seperate thread - speeds up recycler view
+        //use the glide library instead to load the images on a separate thread - speeds up recycler view
         Glide.with(mContext).load(imageResID).into(viewHolder.mImageView);
 
     }

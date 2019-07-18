@@ -46,7 +46,7 @@ public class RedCardAdapter extends RecyclerView.Adapter<RedCardAdapter.RedCardV
         int amount = currentItem.getmAmount();
 
         redCardViewHolder.mCaptionText.setText(caption);
-        redCardViewHolder.mAmountText.setText(String.valueOf(amount));
+        redCardViewHolder.mAmountText.setText("£" +String.valueOf(amount));
 
     }
 

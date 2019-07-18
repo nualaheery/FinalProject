@@ -315,12 +315,12 @@
 
         <ListView
             android:id="@+id/peerListView"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_width="566dp"
+            android:layout_height="185dp"
             android:layout_below="@+id/onOff"
             android:layout_alignParentStart="true"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="168dp"
+            android:layout_marginTop="132dp"
             android:layout_marginEnd="8dp"
             android:background="@android:color/holo_orange_light"
             app:layout_constraintEnd_toEndOf="parent"
@@ -574,7 +574,7 @@
             android:layout_width="584dp"
             android:layout_height="42dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="372dp"
+            android:layout_marginTop="28dp"
             android:layout_marginEnd="8dp"
             android:gravity="center"
             android:text="Select how many players you'd like in a group. Create multiple groups"
@@ -583,9 +583,9 @@
             android:textSize="18sp"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/peerListView" />
 
         <TextView
             android:id="@+id/gameEndedTextView"
@@ -604,6 +604,17 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/groupNumber"
+            android:layout_width="147dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginBottom="8dp"
+            android:text="Group Number"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="invisible"/>
 
 
     </android.support.constraint.ConstraintLayout>

@@ -1,152 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_container_teacher"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    android:orientation="vertical"
+    android:orientation="horizontal"
+    android:gravity="center"
     >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="32dp"
-        android:gravity="top"
-        android:layout_gravity="top"
 
+
+
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/currentGamesCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:layout_margin="12dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
 
         >
 
-        <ImageView
-            android:layout_width="62dp"
-            android:layout_height="62dp"
-            android:src="@drawable/cards_icon"
-            android:layout_alignParentRight="true"
-            />
-
-        <TextView
-            android:id="@+id/titleText"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="32sp"
-            android:textColor="#FFFFFF"
-            android:text="Game title..."
+            android:layout_height="match_parent"
+            android:background="#D6D4D4"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="32dp">
 
-            />
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/games_icon" />
+
+            <TextView
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:text="Start Games"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="22sp"
+
+                />
 
 
-    </RelativeLayout>
+        </LinearLayout>
 
-    <GridLayout
-        android:layout_width="match_parent"
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/playingCardsCard"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_gravity="center"
-
-        android:columnOrderPreserved="false"
-        android:alignmentMode="alignMargins"
-        android:rowCount="2"
-        android:columnCount="2"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:layout_margin="12dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="60dp"
 
         >
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#D6D4D4"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="32dp">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/playingcards_icon" />
+
+            <TextView
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:text="Playing Cards"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="22sp" />
 
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/currentGamesCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            app:cardElevation="6dp"
-            app:cardCornerRadius="12dp"
-            android:layout_margin="12dp"
-
-            >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#D6D4D4"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <ImageView
-                    android:id="@+id/currentGames"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/games_icon" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Start Games"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
+        </LinearLayout>
 
 
-            </LinearLayout>
-
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/playingCardsCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            app:cardElevation="6dp"
-            app:cardCornerRadius="12dp"
-            android:layout_margin="12dp"
-            >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:background="#D6D4D4">
-
-                <ImageView
-                    android:id="@+id/playingCardsImg"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/playingcards_icon" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Playing Cards"
-                    android:textAlignment="center"
-                    android:textSize="18sp"
-                    android:textColor="#000000"
-
-                    />
-
-
-            </LinearLayout>
-
-
-        </android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView>
 
 
 
 
-
-    </GridLayout>
-</FrameLayout>
+</LinearLayout>
 
 
 

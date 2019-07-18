@@ -17,14 +17,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="caption"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_marginBottom="20dp"/>
 
         <TextView
             android:id="@+id/yellowamounttextview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="amount"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_marginBottom="20dp"/>
 
         <Button
             android:id="@+id/removeYellowBtn"

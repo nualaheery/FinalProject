@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -76,6 +77,7 @@ public class GamePlayActivity extends AppCompatActivity {
     private ImageView diceImg; //dice image
 
     private DrawerLayout drawer; //for sidebar
+    Toolbar toolbar;
 
     //card images for UI
     private ImageView redCard;
@@ -123,15 +125,15 @@ public class GamePlayActivity extends AppCompatActivity {
     private int cardID;
 
     //board sqaures - needs completed for the rest of board
-    Square s1 = new Square(1, "red",10);
-    Square s2 = new Square(2, "yellow",10);
-    Square s3 = new Square(3, "blue",10);
-    Square s4 = new Square(4, "green",10);
-    Square s5 = new Square(5, "red",10);
-    Square s6 = new Square(6, "yellow",10);
-    Square s7 = new Square(7, "blue",10);
-    Square s8 = new Square(8, "green",10);
-    Square s9 = new Square (9,"silver", 20);
+    Square s1 = new Square(1, "red", 10);
+    Square s2 = new Square(2, "yellow", 10);
+    Square s3 = new Square(3, "blue", 10);
+    Square s4 = new Square(4, "green", 10);
+    Square s5 = new Square(5, "red", 10);
+    Square s6 = new Square(6, "yellow", 10);
+    Square s7 = new Square(7, "blue", 10);
+    Square s8 = new Square(8, "green", 10);
+    Square s9 = new Square(9, "silver", 20);
     Square s10 = new Square(10, "red");
     Square s11 = new Square(11, "yellow");
     Square s12 = new Square(12, "blue");
@@ -140,8 +142,8 @@ public class GamePlayActivity extends AppCompatActivity {
     Square s15 = new Square(15, "yellow");
     Square s16 = new Square(16, "blue");
     Square s17 = new Square(17, "green");
-    Square s18 = new Square(18, "silver",15);
-    Square s19 = new Square(19,"red");
+    Square s18 = new Square(18, "silver", 15);
+    Square s19 = new Square(19, "red");
     Square s20 = new Square(20, "yellow");
     Square s21 = new Square(21, "blue");
     Square s22 = new Square(22, "green");
@@ -164,10 +166,11 @@ public class GamePlayActivity extends AppCompatActivity {
 
     int ownInterestCounter = 5;
 
+
     //variables for device connection and communication
     Button btnOnOff, btnDiscover, startGameBtn, finishTurnBtn, completedBoardBtn, finishedCreatingGroupsBtn;
     ListView listView;
-    TextView connectionStatus, turnTextView, cashAmountTextView, debitAmountTextView, creditAmountTextView, remainingTotalTextView, selectPlayersTextView, gameHasEndedTextView;
+    TextView connectionStatus, turnTextView, groupNumberTextView, cashAmountTextView, debitAmountTextView, creditAmountTextView, remainingTotalTextView, selectPlayersTextView, gameHasEndedTextView;
 
     // DEVICE COMMUNICATION \\
 
@@ -196,6 +199,13 @@ public class GamePlayActivity extends AppCompatActivity {
 
     //arraylist for storing which client ID sent a message to server
     private ArrayList<Integer> clientSenders = new ArrayList<>();
+
+    //hashmap for storing all the groups that are created
+    private Map<String, ArrayList<ClientHandler>> groups = new LinkedHashMap<>();
+
+    //for the naming of each group in the hashmap
+    int groupNumber = 1;
+    String groupKey = "Group " + groupNumber;
 
     private int clientGroupNumber = 0;
 
@@ -230,13 +240,15 @@ public class GamePlayActivity extends AppCompatActivity {
         buttonClickWork();
 
 
-
     }
 
     /*
      *initialising ALL variables - for UI and for device connection
      */
     public void initalisingWork() {
+
+        toolbar = findViewById(R.id.toolbar);
+
         //initalising cards
         redCard = findViewById(R.id.redCardImg);
         yellowCard = findViewById(R.id.yellowCardImg);
@@ -256,6 +268,7 @@ public class GamePlayActivity extends AppCompatActivity {
         poundSignText = findViewById(R.id.poundSignText);
         removeCardBtn = findViewById(R.id.removeCardBtn);
         characterOnCard = findViewById(R.id.characterOnCard);
+        groupNumberTextView = findViewById(R.id.groupNumber);
 
         //initalising buttons
         payWithCashBtn = findViewById(R.id.payByCashBtn);
@@ -271,7 +284,7 @@ public class GamePlayActivity extends AppCompatActivity {
         oneInGroupBtn = findViewById(R.id.oneInGroupBtn);
         twoInGroupBtn = findViewById(R.id.twoInGroupBtn);
         threeInGroupBtn = findViewById(R.id.threeInGroupBtn);
-        finishedCreatingGroupsBtn= findViewById(R.id.createdAllGroupsBtn);
+        finishedCreatingGroupsBtn = findViewById(R.id.createdAllGroupsBtn);
         pauseBtn = findViewById(R.id.pauseBtn);
         resumeBtn = findViewById(R.id.resumeBtn);
         stopBtn = findViewById(R.id.stopBtn);
@@ -328,7 +341,7 @@ public class GamePlayActivity extends AppCompatActivity {
                 rollDice();
 
                 //checking if the player has completed the board
-                if ((player.getPositionOnBoard() + diceNumber) >= (gameSquares.size()-1)) {
+                if ((player.getPositionOnBoard() + diceNumber) >= (gameSquares.size() - 1)) {
                     //gameSquares.size()-1
                     Toast.makeText(GamePlayActivity.this, "Congratuations. You get a £50 reward for completeing the board", Toast.LENGTH_SHORT).show();
                     //get £50 bonus for finishing first
@@ -393,7 +406,7 @@ public class GamePlayActivity extends AppCompatActivity {
                             diceImg.setClickable(false);
                             enterPinToWithdrawBtn.setVisibility(View.VISIBLE);
                             withdrawBtn.setVisibility(View.VISIBLE);
-                           // withdrawBtn.setClickable(false);
+                            // withdrawBtn.setClickable(false);
 
                     }
                 }
@@ -440,9 +453,8 @@ public class GamePlayActivity extends AppCompatActivity {
                 if (paid) { //check if the player has already paid - stops glitches
                     Toast.makeText(GamePlayActivity.this, "You have already paid", Toast.LENGTH_SHORT).show();
                 } else if (amount > player.getDebitAmount()) {
-                    Toast.makeText(GamePlayActivity.this,"You do not have enough for this payment", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                    Toast.makeText(GamePlayActivity.this, "You do not have enough for this payment", Toast.LENGTH_SHORT).show();
+                } else {
                     payWithDebit();
                 }
 
@@ -468,9 +480,8 @@ public class GamePlayActivity extends AppCompatActivity {
                 if (paid) {
                     Toast.makeText(GamePlayActivity.this, "You have already paid", Toast.LENGTH_SHORT).show();
                 } else if (amount > player.getCashAmount()) {
-                    Toast.makeText(GamePlayActivity.this,"You do not have enough for this payment", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                    Toast.makeText(GamePlayActivity.this, "You do not have enough for this payment", Toast.LENGTH_SHORT).show();
+                } else {
                     payWithCash();
                 }
             }
@@ -507,7 +518,7 @@ public class GamePlayActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (paid) {
                     Toast.makeText(GamePlayActivity.this, "You have already entered your pin", Toast.LENGTH_SHORT).show();
-                //    withdrawBtn.setClickable(true);
+                    //    withdrawBtn.setClickable(true);
                 } else {
                     withdrawCash();
                     withdrawBtn.setClickable(true);
@@ -608,39 +619,42 @@ public class GamePlayActivity extends AppCompatActivity {
         //can then be read by each of the threads as they continuously read input streams
 
 
-
-
-
         oneInGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clientHandlerClass.createGameGroup(1);
+                //  groupKey = "Group "+groupNumber;
+                String msg = "group";
+                clientHandlerClass.createGameGroup(1, msg.getBytes());
             }
         });
 
         twoInGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clientHandlerClass.createGameGroup(2);
+                // clientHandlerClass.createGameGroup(2);
             }
         });
 
         threeInGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clientHandlerClass.createGameGroup(3);
+                //   clientHandlerClass.createGameGroup(3);
             }
         });
 
         finishedCreatingGroupsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startGameBtn.setVisibility(View.VISIBLE);
-                oneInGroupBtn.setVisibility(View.INVISIBLE);
-                twoInGroupBtn.setVisibility(View.INVISIBLE);
-                threeInGroupBtn.setVisibility(View.INVISIBLE);
-                finishedCreatingGroupsBtn.setVisibility(View.INVISIBLE);
-                selectPlayersTextView.setVisibility(View.INVISIBLE);
+                if (groups.size() == 0) {
+                    Toast.makeText(GamePlayActivity.this, "No groups created", Toast.LENGTH_SHORT).show();
+                } else {
+                    startGameBtn.setVisibility(View.VISIBLE);
+                    oneInGroupBtn.setVisibility(View.INVISIBLE);
+                    twoInGroupBtn.setVisibility(View.INVISIBLE);
+                    threeInGroupBtn.setVisibility(View.INVISIBLE);
+                    finishedCreatingGroupsBtn.setVisibility(View.INVISIBLE);
+                    selectPlayersTextView.setVisibility(View.INVISIBLE);
+                }
             }
         });
 
@@ -687,7 +701,7 @@ public class GamePlayActivity extends AppCompatActivity {
         stopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String msg = "stop game";
+                String msg = "show stats";
                 clientHandlerClass.sendMessageToAllClients(msg.getBytes());
             }
         });
@@ -700,8 +714,6 @@ public class GamePlayActivity extends AppCompatActivity {
                 clientClass.finishedTurn(msg.getBytes());
             }
         });
-
-
 
 
     }
@@ -717,6 +729,13 @@ public class GamePlayActivity extends AppCompatActivity {
                     String tempMsg = new String(readBuff, 0, msg.arg1);
                     Log.d(TAG, "handleMessage: " + tempMsg); //debugging
 
+             /*       if (tempMsg.equals("group")) {
+                       // Log.d(TAG, "handleMessage: group number = " +groupNumber);
+                        Log.d(TAG, "handleMessage: groupKey "+groupKey);
+                        groupNumberTextView.setText("groups..."+groupKey);
+                        groupNumberTextView.setVisibility(View.VISIBLE);
+
+                    } */
                     //if start game message is sent (from server) then make it the first player/client in the clients list turn
                     if (tempMsg.equals("start game")) {
                         turnTextView.setText("It is your turn");
@@ -730,30 +749,30 @@ public class GamePlayActivity extends AppCompatActivity {
                         finishTurnBtn.setVisibility(View.INVISIBLE); //setting current client's button invisible
                         diceImg.setVisibility(View.INVISIBLE);
                         //sending message straight on to next client IF current player hasn't completed board
-                            String message = "change turn";
-                            clientHandlerClass.changeTurnHashMap(message.getBytes()); //automatically calling the change turn method so server does not have to click anything
+                        String message = "change turn";
+                        clientHandlerClass.changeTurnHashMap(message.getBytes()); //automatically calling the change turn method so server does not have to click anything
 
                     }
                     //if 'change turn' message is received, give this client the updated textbox and ability to roll the dice
                     if (tempMsg.equals("change turn")) {
                         //finishTurnBtn.setVisibility(View.VISIBLE); //setting next client's turn button visible
-                            checkForInterest();
-                            turnTextView.setText("It is your turn");
-                            turnTextView.setVisibility(View.VISIBLE);
-                            diceImg.setVisibility(View.VISIBLE);
-                            diceImg.setClickable(true);
-                       
+                        checkForInterest();
+                        turnTextView.setText("It is your turn");
+                        turnTextView.setVisibility(View.VISIBLE);
+                        diceImg.setVisibility(View.VISIBLE);
+                        diceImg.setClickable(true);
+
 
                     }
-                    
+
                     if (tempMsg.equals("completed board")) {
                         Toast.makeText(GamePlayActivity.this, "Client completed board", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "handleMessage: Completed Board recieved");
                         String statsMessage = "show stats";
                         clientHandlerClass.showStatsOfGroup(statsMessage.getBytes()); //automatically sending this once 'compeleted board' is recieved by server
-                                                
+
                     }
-                    
+
                     if (tempMsg.equals("show stats")) {
                         redCard.setVisibility(View.INVISIBLE);
                         yellowCard.setVisibility(View.INVISIBLE);
@@ -764,11 +783,11 @@ public class GamePlayActivity extends AppCompatActivity {
                         completedBoardBtn.setVisibility(View.INVISIBLE);
                         gameHasEndedTextView.setVisibility(View.VISIBLE);
 
-                        cashAmountTextView.setText("Remaining amount of cash: £" +player.getCashAmount());
-                        debitAmountTextView.setText("Remaining amount on debit card: £" +player.getDebitAmount());
-                        creditAmountTextView.setText("Remaining amount on credit card: £" + player.getCreditAmount());
+                        cashAmountTextView.setText("Remaining amount of cash: £" + String.format("%.2f", player.getCashAmount()));
+                        debitAmountTextView.setText("Remaining amount on debit card: £" + String.format("%.2f", player.getDebitAmount()));
+                        creditAmountTextView.setText("Remaining amount on credit card: £" + String.format("%.2f", player.getCreditAmount()));
                         double remainingAmount = player.getCashAmount() + player.getDebitAmount() + player.getCreditAmount();
-                        remainingTotalTextView.setText("Overall amount remaining: £" + remainingAmount);
+                        remainingTotalTextView.setText("Overall amount remaining: £" + String.format("%.2f", remainingAmount));
 
                         cashAmountTextView.setVisibility(View.VISIBLE);
                         creditAmountTextView.setVisibility(View.VISIBLE);
@@ -845,6 +864,7 @@ public class GamePlayActivity extends AppCompatActivity {
                 threeInGroupBtn.setVisibility(View.VISIBLE);
                 finishedCreatingGroupsBtn.setVisibility(View.VISIBLE);
                 selectPlayersTextView.setVisibility(View.VISIBLE);
+                toolbar.setVisibility(View.INVISIBLE);
                 serverClass = new ServerClass();
                 serverClass.start();
             } else if (info.groupFormed) { //client
@@ -902,12 +922,12 @@ public class GamePlayActivity extends AppCompatActivity {
      * initialsing and setting up the toolbar
      */
     public void setUpToolBar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
 
-     //   NavigationView navigationView = findViewById(R.id.nav_view);
-     //   navigationView.setNavigationItemSelectedListener(this);
+        //   NavigationView navigationView = findViewById(R.id.nav_view);
+        //   navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -918,19 +938,19 @@ public class GamePlayActivity extends AppCompatActivity {
 
     }
 
-  /*  @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.nav_repaycredit:
-                Toast.makeText(this, "repay clicked", Toast.LENGTH_SHORT).show();
-        }
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    } *.
+    /*  @Override
+      public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+          switch (menuItem.getItemId()) {
+              case R.id.nav_repaycredit:
+                  Toast.makeText(this, "repay clicked", Toast.LENGTH_SHORT).show();
+          }
+          drawer.closeDrawer(GravityCompat.START);
+          return true;
+      } *.
 
-    /*
-     * assigning values for each of the items (debit, credit, cash) in the toolbar
-     */
+      /*
+       * assigning values for each of the items (debit, credit, cash) in the toolbar
+       */
     public void toolBarAmounts() {
         NavigationView navigationView = findViewById(R.id.nav_view);
         Menu menu = navigationView.getMenu();
@@ -938,15 +958,16 @@ public class GamePlayActivity extends AppCompatActivity {
 
         //setting debitcard value
         MenuItem navDebitCard = menu.findItem(R.id.nav_debitcard);
-        navDebitCard.setTitle("Debit Card: £" + player.getDebitAmount());
+        navDebitCard.setTitle("Debit Card: £" + String.format("%.2f", player.getDebitAmount()));
+
 
         //setting credit card value
         MenuItem navCreditCard = menu.findItem(R.id.nav_creditcard);
-        navCreditCard.setTitle("Credit Card: " + player.getCreditAmount());
+        navCreditCard.setTitle("Credit Card: " + String.format("%.2f", player.getCreditAmount()));
 
         //setting cash value
         MenuItem navCashAmount = menu.findItem(R.id.nav_cash);
-        navCashAmount.setTitle("Cash: £" + player.getCashAmount());
+        navCashAmount.setTitle("Cash: £" + String.format("%.2f", player.getCashAmount()));
 
         MenuItem navInterest = menu.findItem(R.id.nav_interestinfo);
         if (player.getCreditAmount() >= 0) {
@@ -1078,7 +1099,7 @@ public class GamePlayActivity extends AppCompatActivity {
     /*
      * making the back button remove the toolbar if pressed when open
      */
-   // @Override
+    // @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -1441,26 +1462,26 @@ public class GamePlayActivity extends AppCompatActivity {
         paid = false;
 
         if (!player.isPinBlocked()) {
-        //if the withdrawal amount on the silver square > they player's debit amount
-        if (gameSquares.get(player.getPositionOnBoard()).getWithdrawalAmount() > player.getDebitAmount()) {
-            cannotWithdrawBtn.setVisibility(View.VISIBLE);
-            withdrawBtn.setVisibility(View.INVISIBLE);
-            enterPinToWithdrawBtn.setVisibility(View.INVISIBLE);
-
-        } else {
-
-            amount = gameSquares.get(player.getPositionOnBoard()).getWithdrawalAmount();
-
-            if (!player.isPinBlocked()) {
-
-                WithdrawEnterPinDialog withdrawEnterPinDialog = new WithdrawEnterPinDialog();
-                withdrawEnterPinDialog.show(getSupportFragmentManager(), null);
+            //if the withdrawal amount on the silver square > they player's debit amount
+            if (gameSquares.get(player.getPositionOnBoard()).getWithdrawalAmount() > player.getDebitAmount()) {
+                cannotWithdrawBtn.setVisibility(View.VISIBLE);
+                withdrawBtn.setVisibility(View.INVISIBLE);
+                enterPinToWithdrawBtn.setVisibility(View.INVISIBLE);
 
             } else {
-                ChangeForgottenPinDialog changePinDialog = new ChangeForgottenPinDialog();
-                changePinDialog.show(getSupportFragmentManager(), "change pin dialog");
+
+                amount = gameSquares.get(player.getPositionOnBoard()).getWithdrawalAmount();
+
+                if (!player.isPinBlocked()) {
+
+                    WithdrawEnterPinDialog withdrawEnterPinDialog = new WithdrawEnterPinDialog();
+                    withdrawEnterPinDialog.show(getSupportFragmentManager(), null);
+
+                } else {
+                    ChangeForgottenPinDialog changePinDialog = new ChangeForgottenPinDialog();
+                    changePinDialog.show(getSupportFragmentManager(), "change pin dialog");
+                }
             }
-        }
 
 
 
@@ -1590,13 +1611,13 @@ public class GamePlayActivity extends AppCompatActivity {
         //arraylist for creating a group of clients
         private ArrayList<ClientHandler> newGroup;
         //hashmap for storing all the groups that are created
-        private Map<String, ArrayList<ClientHandler>> groups = new LinkedHashMap<>();
+        //  private Map<String, ArrayList<ClientHandler>> groups = new LinkedHashMap<>();
         //not used i don't think - take out
         private ArrayList<ArrayList<ClientHandler>> allGroups = new ArrayList<>();
         //for keeping track of the client that is added to a group
         private int clientNumber = 0;
         //for the naming of each group in the hashmap
-        private int groupNumber = 1;
+        // private int groupNumber = 1;
         //for retreiving the ID of the client that sent the last message
         private int messageReceivedFromClientID;
 
@@ -1645,7 +1666,7 @@ public class GamePlayActivity extends AppCompatActivity {
          * Creates a new group with a chosen number of clients within the group
          * Once group is created, the new group is stored in a hashmap
          */
-        public void createGameGroup(int numberOfClientsInGroup) {
+        public void createGameGroup(int numberOfClientsInGroup, byte[] bytes) {
 
             if (clientNumber > (clients.size() - 1)) {
                 runOnUiThread(new Runnable() {
@@ -1657,9 +1678,7 @@ public class GamePlayActivity extends AppCompatActivity {
 
             } else if (numberOfClientsInGroup > (clients.size())) {
                 Toast.makeText(getApplicationContext(), "Cannot form a group this size", Toast.LENGTH_SHORT).show();
-            }
-
-            else {
+            } else {
 
                 int clientNumberForLoop = clientNumber;
                 Log.d(TAG, "createGameGroup: clientNumberForLoop: " + clientNumberForLoop);
@@ -1678,21 +1697,22 @@ public class GamePlayActivity extends AppCompatActivity {
 
                     clientNumber++;
                     // Log.d(TAG, "createGameGroup: new client number after ++: " + clientNumber);
-                    Toast.makeText(GamePlayActivity.this, "Group with "+numberOfClientsInGroup+ " players created", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GamePlayActivity.this, "Group with " + numberOfClientsInGroup + " players created", Toast.LENGTH_SHORT).show();
 
                 }
 
                 //added group to hashmap
                 groups.put("Group " + groupNumber, newGroup);
+                Log.d(TAG, "Group " + groupNumber + "created");
                 groupNumber++;
 
-              /*  for (ClientHandler client: newGroup) {
+                for (ClientHandler client : newGroup) {
                     try {
                         client.out.write(bytes);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                } */
+                }
 
             }
 
@@ -1712,7 +1732,7 @@ public class GamePlayActivity extends AppCompatActivity {
                 //the first client in each group
                 ClientHandler firstClientInEachGroup = clientsInGroup.get(0);
                 Log.d(TAG, "messageToArrayListTest: clientsInGroup.get(0) = " + clientsInGroup.get(0));
-               //write message
+                //write message
                 try {
                     firstClientInEachGroup.out.write(bytes);
                 } catch (IOException e) {
@@ -1728,7 +1748,6 @@ public class GamePlayActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
 
 
         public void changeTurnHashMap(byte[] bytes) {
@@ -1778,7 +1797,7 @@ public class GamePlayActivity extends AppCompatActivity {
                                 }
                                 //   nextPlayer.write(bytes);
                             } else {
-                               //then set the next player to the next client in the list
+                                //then set the next player to the next client in the list
                                 nextPlayer = clientsInSpecificGroup.get(indexOfCurrentlyClient + 1);
                                 try {
 
@@ -1791,7 +1810,6 @@ public class GamePlayActivity extends AppCompatActivity {
 
 
                         }
-
 
 
                     } else {
@@ -1809,7 +1827,6 @@ public class GamePlayActivity extends AppCompatActivity {
             for (Map.Entry<String, ArrayList<ClientHandler>> entry : groups.entrySet()) {
                 String key = entry.getKey();
                 List<ClientHandler> clientsInGroup = entry.getValue();
-
 
 
             }
@@ -1838,18 +1855,18 @@ public class GamePlayActivity extends AppCompatActivity {
                             //get the group that the sender is in
                             List<ClientHandler> clientsInSpecificGroup = entry.getValue();
                             Log.d(TAG, "changeTurnHashMap: client id before +1 " + client.clientID);
-                            
+
                             //send a message to each client in this group
-                            for (ClientHandler clientInGroup: clientsInSpecificGroup) {
+                            for (ClientHandler clientInGroup : clientsInSpecificGroup) {
                                 try {
                                     clientInGroup.out.write(bytes);
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
                             }
-                            
+
                         }
-                        
+
 
                     } else {
                         Log.d(TAG, "changeTurnHashMap: ELSE client.clientID " + client.clientID + "==" + clientSenders.get(clientSenders.size() - 1));
