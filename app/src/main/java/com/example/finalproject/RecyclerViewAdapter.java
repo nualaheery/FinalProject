@@ -69,12 +69,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        MonsterItem currentItem = mMonsterList.get(i);
+    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+        MonsterItem currentItem = mMonsterList.get(position);
 
+        //get monster name
         String monsterName = currentItem.getNameText();
 
+        //get image name
         String imageName = currentItem.getMonsterImageResouce();
+        //convert image name to an ID of type int to be displayed
         int imageResID = mContext.getResources().getIdentifier(imageName, "drawable", mContext.getPackageName());
 
         viewHolder.mMonsterName.setText(monsterName);

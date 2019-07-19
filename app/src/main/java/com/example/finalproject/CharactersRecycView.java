@@ -53,40 +53,45 @@ public class CharactersRecycView extends AppCompatActivity implements RecyclerVi
         mAdapter.setOnItemClickListener(CharactersRecycView.this);
 
 
-        loadMonstersFromJson();
+        readJSONFile();
 
     }
 
-    public void loadMonstersFromJson() {
+    public void readJSONFile() {
+        //open the JSON raw file
         Resources res = getResources();
         InputStream is = res.openRawResource(R.raw.monsters);
 
+        //scane and read the file
         Scanner scanner = new Scanner(is);
-
         StringBuilder builder = new StringBuilder();
 
         while (scanner.hasNextLine()) {
             builder.append(scanner.nextLine());
         }
 
-        displayMonsters(builder.toString());
+        //call method to convert the read data into objects
+        converJSONToObject(builder.toString());
 
     }
 
-    public void displayMonsters(String s) {
+    public void converJSONToObject(String s) {
 
         try {
             JSONObject root = new JSONObject(s);
-            JSONArray jsonArray = root.getJSONArray("monsters");
+            JSONArray jsonArray = root.getJSONArray("monsters"); //retrieve the JSON array
 
             for (int i = 0; i < jsonArray.length(); i++) {
+                //store each of the details within the JSON file
                 String monsterName = jsonArray.getJSONObject(i).getString("name");
                 String monsterImg = jsonArray.getJSONObject(i).getString("image_name");
                 String monsterDebitCardNum = jsonArray.getJSONObject(i).getString("debit_card_number");
                 String monsterCreditCardNum = jsonArray.getJSONObject(i).getString("credit_card_number");
 
+                //create new MonsterItem object using stored details
                 MonsterItem monster = new MonsterItem(monsterImg, monsterName, monsterDebitCardNum, monsterCreditCardNum);
 
+                //add new MonsterItem to arraylist for displaying
                 monsterItems.add(monster);
 
             }

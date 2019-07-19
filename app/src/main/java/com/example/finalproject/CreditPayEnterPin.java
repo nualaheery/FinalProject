@@ -67,26 +67,31 @@ public class CreditPayEnterPin extends AppCompatDialogFragment {
                 public void onClick(View v) {
 
                     Boolean wantToCloseDialog = false;
-                    String pinEntered = pinCredEntryText.getText().toString();
-                    String correctPin = player.getPinNumber();
+                    String pinEntered = pinCredEntryText.getText().toString(); //pin entered by user
+                    String correctPin = player.getPinNumber(); //user's correct pin
 
+                    //checking pin isn't blocked
                     if (loginAttempt < MAX_LOGIN_ATTEMPT) {
+                        //checking pin entered is correct
                         if (pinEntered.equals(correctPin)) {
-                            int amountOwed = amount;
+                            int amountOwed = amount; //amount obtained from the specific card
                             player.setCreditAmount(player.getCreditAmount() - amountOwed);
 
                             Toast.makeText(getActivity(), "Paid £" + amount, Toast.LENGTH_SHORT).show();
 
+                            //setting paid boolean to true
                             GamePlayActivity.paid = true;
 
                             wantToCloseDialog = true;
 
                         } else {
+                            //pin entered not correct
                             Toast.makeText(getActivity(), "Incorrect pin, try again", Toast.LENGTH_SHORT).show();
                             loginAttempt++;
 
                         }
                     } else {
+                        //setting player's card to blocked
                         player.setPinBlocked(true);
                         Toast.makeText(getActivity(), "Pin blocked, please create a new pin", Toast.LENGTH_LONG).show();
                         d.dismiss();

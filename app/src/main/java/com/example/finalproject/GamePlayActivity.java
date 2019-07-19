@@ -125,14 +125,14 @@ public class GamePlayActivity extends AppCompatActivity {
     private int cardID;
 
     //board sqaures - needs completed for the rest of board
-    Square s1 = new Square(1, "red", 10);
-    Square s2 = new Square(2, "yellow", 10);
-    Square s3 = new Square(3, "blue", 10);
-    Square s4 = new Square(4, "green", 10);
-    Square s5 = new Square(5, "red", 10);
-    Square s6 = new Square(6, "yellow", 10);
-    Square s7 = new Square(7, "blue", 10);
-    Square s8 = new Square(8, "green", 10);
+    Square s1 = new Square(1, "red");
+    Square s2 = new Square(2, "yellow");
+    Square s3 = new Square(3, "blue");
+    Square s4 = new Square(4, "green");
+    Square s5 = new Square(5, "red");
+    Square s6 = new Square(6, "yellow");
+    Square s7 = new Square(7, "blue");
+    Square s8 = new Square(8, "green");
     Square s9 = new Square(9, "silver", 20);
     Square s10 = new Square(10, "red");
     Square s11 = new Square(11, "yellow");
@@ -342,20 +342,17 @@ public class GamePlayActivity extends AppCompatActivity {
 
                 //checking if the player has completed the board
                 if ((player.getPositionOnBoard() + diceNumber) >= (gameSquares.size() - 1)) {
-                    //gameSquares.size()-1
-                    Toast.makeText(GamePlayActivity.this, "Congratuations. You get a £50 reward for completeing the board", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GamePlayActivity.this, "Congratulations. You get a £50 reward for completing the board", Toast.LENGTH_SHORT).show();
                     //get £50 bonus for finishing first
                     player.setCashAmount((player.getCashAmount() + 50));
                     //setting visibilities
                     diceImg.setVisibility(View.INVISIBLE);
                     completedBoardBtn.setVisibility(View.VISIBLE);
+
                 } else {
                     //updating player's new position depending on value of dice
                     newPosition = player.getPositionOnBoard() + diceNumber;
                     player.setPositionOnBoard(newPosition);
-
-
-                    //      int newPosition = player.movePosition(GamePlayActivity.this, diceNumber, gameSquares);
 
                     //setting clickability of cards depending on the colour that the player has landed on
                     switch (gameSquares.get(newPosition).getSquareColour()) {
@@ -407,6 +404,13 @@ public class GamePlayActivity extends AppCompatActivity {
                             enterPinToWithdrawBtn.setVisibility(View.VISIBLE);
                             withdrawBtn.setVisibility(View.VISIBLE);
                             // withdrawBtn.setClickable(false);
+                            captionText.setText("Withdraw:");
+                            amountText.setText(String.valueOf(gameSquares.get(player.getPositionOnBoard()).getWithdrawalAmount()));
+                            blankCard.setVisibility(View.VISIBLE);
+                            poundSignText.setVisibility(View.VISIBLE);
+                            characterOnCard.setVisibility(View.VISIBLE);
+                            captionText.setVisibility(View.VISIBLE);
+                            amountText.setVisibility(View.VISIBLE);
 
                     }
                 }
@@ -535,6 +539,9 @@ public class GamePlayActivity extends AppCompatActivity {
                     toolBarAmounts();
                     enterPinToWithdrawBtn.setVisibility(View.INVISIBLE);
                     withdrawBtn.setVisibility(View.INVISIBLE);
+                    blankCard.setVisibility(View.INVISIBLE);
+                    captionText.setVisibility(View.INVISIBLE);
+                    amountText.setVisibility(View.INVISIBLE);
                     finishTurnBtn.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(GamePlayActivity.this, "Enter your pin first", Toast.LENGTH_SHORT).show();
@@ -1362,6 +1369,11 @@ public class GamePlayActivity extends AppCompatActivity {
         yellowCard.setEnabled(false);
         greenCard.setEnabled(false);
         diceImg.setClickable(false);
+
+    }
+
+    public void setVisibilityForWithdraw() {
+
 
     }
 

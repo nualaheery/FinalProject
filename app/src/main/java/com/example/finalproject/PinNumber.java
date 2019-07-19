@@ -12,7 +12,7 @@ public class PinNumber extends AppCompatActivity {
     private TextView pinTextView;
     private Button keepPinBtn;
     private Button changePinBtn;
-    public static String generatedPin;
+    public  String generatedPin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,6 @@ public class PinNumber extends AppCompatActivity {
     }
 
     public void goToGame() {
-        //method if player keeps their pin and goes to the game
         Intent intent = new Intent(PinNumber.this, GamePlayActivity.class);
         intent.putExtra("chosenpin",generatedPin);
         startActivity(intent);

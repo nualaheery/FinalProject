@@ -11,6 +11,9 @@ public class Player {
     private double cashAmount;
     private boolean pinBlocked;
 
+    public Player() {
+
+    }
 
     public Player(int positionOnBoard, String pinNumber, int debitAmount, int creditAmount, int cashAmount, boolean pinBlocked) {
         this.positionOnBoard = positionOnBoard;
