@@ -11,6 +11,7 @@ public class PlayerTest {
     private int debitAmount;
     private String pinNumber;
     private Player player;
+    private double delta = 1;
 
     @Before
     public void setUp() {
@@ -32,6 +33,6 @@ public class PlayerTest {
     public void setDebitAmount() {
         player.setDebitAmount(debitAmount);
 
-        assertEquals(debitAmount,player.getDebitAmount());
+        assertEquals(debitAmount,player.getDebitAmount(), delta);
     }
 }
