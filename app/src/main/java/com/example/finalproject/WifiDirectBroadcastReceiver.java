@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +24,7 @@ public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
         mActivity = activity;
 
     }
+    @SuppressLint("SetTextI18n")
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction(); //use this to check the current action
@@ -50,14 +52,13 @@ public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
             }
 
             NetworkInfo networkInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
-            if (networkInfo.isConnected()) { //we are connect with the other device, requestion connection info to find group owner IP
+            if (networkInfo.isConnected()) { //we are connected with the other device, request connection info to find group owner IP
                 mManager.requestConnectionInfo(mChannel,mActivity.connectionInfoListener);
-
-
 
             } else {
                 mActivity.connectionStatus.setText("Device Disconnected");
             }
+
         } else if (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) { //indicates this device's configuration details have changed
             //respond to this device's wifi state changing
         }

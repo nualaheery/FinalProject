@@ -27,7 +27,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -151,12 +150,13 @@ public class GamePlayActivity extends AppCompatActivity {
     Square s24 = new Square(24, "yellow");
     Square s25 = new Square(25, "blue");
     Square s26 = new Square(26, "green");
+    Square s27 = new Square(27, "silver", 5);
 
     //player object
     public static Player player;
 
     //create a square array with the game's squares - the board
-    ArrayList<Square> gameSquares = new ArrayList<Square>(Arrays.asList(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26));
+    ArrayList<Square> gameSquares = new ArrayList<Square>(Arrays.asList(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27));
 
 
     //static amount to take the amount displayed on the card and use it for updating player's amount of money
@@ -164,7 +164,7 @@ public class GamePlayActivity extends AppCompatActivity {
     //static paid boolean to check if player has paid before being able to continue in various occasions
     public static boolean paid;
 
-    int ownInterestCounter = 5;
+    int ownInterestCounter = 2;
 
 
     //variables for device connection and communication
@@ -310,12 +310,13 @@ public class GamePlayActivity extends AppCompatActivity {
 
 
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        //provides the API for managing Wi-Fi peer-to-peer connectivity
+        //initalise manager - provides the API for managing Wi-Fi peer-to-peer connectivity
         mManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
-        //connects the application to the Wi-Fi p2p framework - most p2p operations require channel as an argument
+        //initalise channel - connects the application to the Wi-Fi p2p framework
         mChannel = mManager.initialize(this, getMainLooper(), null);
-
+        //initialise WififDirectBroadcastReceiver
         mReceiver = new WifiDirectBroadcastReceiver(mManager, mChannel, this);
+
         mIntentFiler = new IntentFilter();
         //add actions to intentfilter
         mIntentFiler.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
@@ -346,7 +347,7 @@ public class GamePlayActivity extends AppCompatActivity {
                     //get £50 bonus for finishing first
                     player.setCashAmount((player.getCashAmount() + 50));
                     //setting visibilities
-                    diceImg.setVisibility(View.INVISIBLE);
+                    diceImg.setClickable(false);
                     completedBoardBtn.setVisibility(View.VISIBLE);
 
                 } else {
@@ -604,13 +605,14 @@ public class GamePlayActivity extends AppCompatActivity {
                 //config needed for connecting to the peer
                 WifiP2pConfig config = new WifiP2pConfig();
                 config.deviceAddress = device.deviceAddress;
+                //make the clicked device a client
+                config.groupOwnerIntent = 0;
 
                 //connecting to the chosen peer
                 mManager.connect(mChannel, config, new WifiP2pManager.ActionListener() {
                     @Override
                     public void onSuccess() {
                         Toast.makeText(getApplicationContext(), "Connected to " + device.deviceName, Toast.LENGTH_SHORT).show();
-                        connectedDevices.add(device);
                     }
 
                     @Override
@@ -638,14 +640,16 @@ public class GamePlayActivity extends AppCompatActivity {
         twoInGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // clientHandlerClass.createGameGroup(2);
+                String msg = "group";
+                 clientHandlerClass.createGameGroup(2, msg.getBytes());
             }
         });
 
         threeInGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //   clientHandlerClass.createGameGroup(3);
+                String msg = "group";
+                   clientHandlerClass.createGameGroup(3, msg.getBytes());
             }
         });
 
@@ -729,20 +733,19 @@ public class GamePlayActivity extends AppCompatActivity {
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            switch (msg.what) { //what is in int value for identifying message
+            switch (msg.what) { //what is the int value for identifying message
                 case MESSAGE_READ:
                     //message is in byte form from output stream - changing to string
                     byte[] readBuff = (byte[]) msg.obj;
                     String tempMsg = new String(readBuff, 0, msg.arg1);
                     Log.d(TAG, "handleMessage: " + tempMsg); //debugging
 
-             /*       if (tempMsg.equals("group")) {
-                       // Log.d(TAG, "handleMessage: group number = " +groupNumber);
-                        Log.d(TAG, "handleMessage: groupKey "+groupKey);
-                        groupNumberTextView.setText("groups..."+groupKey);
-                        groupNumberTextView.setVisibility(View.VISIBLE);
+                    if (tempMsg.equals("group")) {
+                        // Log.d(TAG, "handleMessage: group number = " +groupNumber);
+                        Log.d(TAG, "handleMessage: groupKey " + groupKey);
+                        groupNumberTextView.setText("In Group");
 
-                    } */
+                    }
                     //if start game message is sent (from server) then make it the first player/client in the clients list turn
                     if (tempMsg.equals("start game")) {
                         turnTextView.setText("It is your turn");
@@ -1573,7 +1576,7 @@ public class GamePlayActivity extends AppCompatActivity {
         ServerSocket serverSocket;
         private int clientID = 0;
         private ArrayList<ClientHandler> clients = new ArrayList<>();
-        private ExecutorService pool = Executors.newFixedThreadPool(4);
+        private ExecutorService pool = Executors.newFixedThreadPool(35);
 
 
         /*
@@ -1591,7 +1594,7 @@ public class GamePlayActivity extends AppCompatActivity {
                     //new thread for each new client for communication with server
                     clientHandlerClass = new ClientHandler(clientSocket, clients, clientID);
                     Log.d(TAG, "Client" + clientID + "added");
-                    //incrementing the id for the next client that joins
+                    //incrementing the id for the next client that joins - identifies client
                     clientID++;
                     //adding client to list
                     clients.add(clientHandlerClass);
@@ -1654,9 +1657,8 @@ public class GamePlayActivity extends AppCompatActivity {
          */
         @Override
         public void run() {
-            Log.d(TAG, "CliendHandler Run: waiting for message");
-            byte[] buffer = new byte[1024];
-            int bytes;
+            byte[] buffer = new byte[1024]; //contains the message
+            int bytes; //the number of bytes in the message
 
             while (clientSocket != null) {
                 try {
@@ -1679,7 +1681,7 @@ public class GamePlayActivity extends AppCompatActivity {
          * Once group is created, the new group is stored in a hashmap
          */
         public void createGameGroup(int numberOfClientsInGroup, byte[] bytes) {
-
+            //if there aren't enough clients connect to make a new group
             if (clientNumber > (clients.size() - 1)) {
                 runOnUiThread(new Runnable() {
                     @Override
@@ -1687,7 +1689,7 @@ public class GamePlayActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Not enough players for new group", Toast.LENGTH_SHORT).show();
                     }
                 });
-
+                // if the group size chosen is greater than how many clients are connected
             } else if (numberOfClientsInGroup > (clients.size())) {
                 Toast.makeText(getApplicationContext(), "Cannot form a group this size", Toast.LENGTH_SHORT).show();
             } else {
@@ -1699,18 +1701,19 @@ public class GamePlayActivity extends AppCompatActivity {
                 newGroup = new ArrayList<>();
 
                 //starting loop at the current client within the whole list of clients
-                //ending loop at the current number of clients already in a newGroup list, plus the number that are going to be added this list
-                for (int currentClient = clientNumberForLoop; currentClient < (clientNumberForLoop + numberOfClientsInGroup); currentClient++) {
-                    Log.d(TAG, "createGameGroup: the for loop: int " + currentClient + "=" + clientNumberForLoop + ";" + currentClient + "<" +
-                            (clientNumberForLoop + numberOfClientsInGroup));
+                //ending loop at the current number of clients already in a newGroup list,
+                // plus the number that are going to be added this list
+                for (int currentClient = clientNumberForLoop; currentClient < (clientNumberForLoop + numberOfClientsInGroup);
+                     currentClient++) {
+
                     //add the client from the overall clients list at the specfic index
                     newGroup.add(clients.get(currentClient));
                     Log.d(TAG, "createGameGroup: client ID added: " + clients.get(currentClient).clientID);
 
                     clientNumber++;
                     // Log.d(TAG, "createGameGroup: new client number after ++: " + clientNumber);
-                    Toast.makeText(GamePlayActivity.this, "Group with " + numberOfClientsInGroup + " players created", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(GamePlayActivity.this, "Group with " + numberOfClientsInGroup +
+                            " players created", Toast.LENGTH_SHORT).show();
                 }
 
                 //added group to hashmap
@@ -1739,11 +1742,9 @@ public class GamePlayActivity extends AppCompatActivity {
             for (Map.Entry<String, ArrayList<ClientHandler>> entry : groups.entrySet()) {
                 String key = entry.getKey();
                 List<ClientHandler> clientsInGroup = entry.getValue();
-                Log.d(TAG, "messageToArrayListTest: Key: " + key + " No. of Clients: " + clientsInGroup.size() + entry.getValue().toString());
 
                 //the first client in each group
                 ClientHandler firstClientInEachGroup = clientsInGroup.get(0);
-                Log.d(TAG, "messageToArrayListTest: clientsInGroup.get(0) = " + clientsInGroup.get(0));
                 //write message
                 try {
                     firstClientInEachGroup.out.write(bytes);
@@ -1783,7 +1784,6 @@ public class GamePlayActivity extends AppCompatActivity {
                     //get the last client sender added to the arraylist
                     //if the client is the sender
                     if (client.clientID == clientSenders.get(clientSenders.size() - 1)) {
-                        Log.d(TAG, "changeTurnHashMap: IF client.clientID " + client.clientID + "==" + clientSenders.get(clientSenders.size() - 1));
 
                         //find what group they are in
                         if (clientsInGroup.contains(client)) {
@@ -1792,14 +1792,14 @@ public class GamePlayActivity extends AppCompatActivity {
                             List<ClientHandler> clientsInSpecificGroup = entry.getValue();
                             Log.d(TAG, "changeTurnHashMap: client id before +1 " + client.clientID);
                             //where the sender is in the arraylist
-                            int indexOfCurrentlyClient = clientsInSpecificGroup.indexOf(client);
-                            Log.d(TAG, "changeTurnHashMap: index of client: " + indexOfCurrentlyClient);
+                            int indexOfCurrentClient = clientsInSpecificGroup.indexOf(client);
+                            Log.d(TAG, "changeTurnHashMap: index of client: " + indexOfCurrentClient);
                             //size of the arraylist
                             int sizeOfSpecificGroup = clientsInSpecificGroup.size();
                             Log.d(TAG, "changeTurnHashMap: size of group: " + sizeOfSpecificGroup);
 
                             //if the client index == the last client in this arraylist
-                            if (indexOfCurrentlyClient == (sizeOfSpecificGroup - 1)) {
+                            if (indexOfCurrentClient == (sizeOfSpecificGroup - 1)) {
                                 //then set the next player to the fisrt client in the arraylist
                                 nextPlayer = clientsInSpecificGroup.get(0);
                                 try {
@@ -1810,7 +1810,7 @@ public class GamePlayActivity extends AppCompatActivity {
                                 //   nextPlayer.write(bytes);
                             } else {
                                 //then set the next player to the next client in the list
-                                nextPlayer = clientsInSpecificGroup.get(indexOfCurrentlyClient + 1);
+                                nextPlayer = clientsInSpecificGroup.get(indexOfCurrentClient + 1);
                                 try {
 
                                     nextPlayer.out.write(bytes);
@@ -1893,7 +1893,7 @@ public class GamePlayActivity extends AppCompatActivity {
         /*
          * Method can be used any time the server needs to send a message to ALL clients that are connected
          */
-        public void sendMessageToAllClients(byte[] bytes) {
+        private void sendMessageToAllClients(byte[] bytes) {
             for (ClientHandler client : clients) {
                 try {
                     client.out.write(bytes);

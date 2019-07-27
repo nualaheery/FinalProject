@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BlueCards extends AppCompatActivity implements  BlueCardAdapter.OnItemClickListener {
+public class BlueCards extends AppCompatActivity implements BlueCardAdapter.OnItemClickListener {
 
     private RecyclerView mRecyclerView;
     private BlueCardAdapter mBlueCardAdapter;
@@ -39,7 +39,7 @@ public class BlueCards extends AppCompatActivity implements  BlueCardAdapter.OnI
         setContentView(R.layout.activity_blue_cards);
 
         mRecyclerView = findViewById(R.id.blue_recyclerview);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
         mCardList = new ArrayList<>();
 
@@ -50,7 +50,7 @@ public class BlueCards extends AppCompatActivity implements  BlueCardAdapter.OnI
         addbluebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BlueCards.this,InsertBlueCard.class);
+                Intent intent = new Intent(BlueCards.this, InsertBlueCard.class);
                 startActivity(intent);
             }
         });
@@ -67,16 +67,16 @@ public class BlueCards extends AppCompatActivity implements  BlueCardAdapter.OnI
                         try {
                             JSONArray jsonArray = response.getJSONArray("bluecards");
 
-                            for (int i=0; i< jsonArray.length(); i++) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject blueCard = jsonArray.getJSONObject(i);
 
                                 String caption = blueCard.getString("caption");
                                 int amount = blueCard.getInt("amount");
 
-                                mCardList.add(new PlayingCard(caption,amount));
+                                mCardList.add(new PlayingCard(caption, amount));
                             }
 
-                            mBlueCardAdapter = new BlueCardAdapter(BlueCards.this,mCardList);
+                            mBlueCardAdapter = new BlueCardAdapter(BlueCards.this, mCardList);
                             mRecyclerView.setAdapter(mBlueCardAdapter);
 
                             mBlueCardAdapter.setOnItemClickListener(BlueCards.this);
@@ -116,7 +116,7 @@ public class BlueCards extends AppCompatActivity implements  BlueCardAdapter.OnI
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parameters = new HashMap<String, String>();
                 parameters.put("caption", itemToRemove);
-                Log.d("nuala", "card removed: " +itemToRemove);
+                Log.d("nuala", "card removed: " + itemToRemove);
 
 
                 return parameters;
