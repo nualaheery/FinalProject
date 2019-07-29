@@ -91,7 +91,7 @@ public class CreditPayEnterPin extends AppCompatDialogFragment {
 
                         }
                     } else {
-                        //setting player's card to blocked
+                        //setting playerNumber's card to blocked
                         player.setPinBlocked(true);
                         Toast.makeText(getActivity(), "Pin blocked, please create a new pin", Toast.LENGTH_LONG).show();
                         d.dismiss();

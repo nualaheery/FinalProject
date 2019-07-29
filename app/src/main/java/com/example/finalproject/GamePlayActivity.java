@@ -64,6 +64,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -100,6 +101,7 @@ public class GamePlayActivity extends AppCompatActivity {
     private Button enterPinToWithdrawBtn;
     private Button withdrawBtn;
     private Button cannotWithdrawBtn;
+    private Button startWithdrawBtn;
 
 
     //teacher buttons
@@ -114,10 +116,10 @@ public class GamePlayActivity extends AppCompatActivity {
     //request queue for parsing JSON for the cards
     RequestQueue requestQueue;
 
-    //dice number generated in order to update the player's position on baord
+    //dice number generated in order to update the playerNumber's position on baord
     private int diceNumber;
 
-    //retrieveing the monster that the player previously chose
+    //retrieveing the monster that the playerNumber previously chose
     private MonsterItem monsterChosen = MonsterDetails.monsterItem;
 
     //identifier for playing cards
@@ -152,16 +154,16 @@ public class GamePlayActivity extends AppCompatActivity {
     Square s26 = new Square(26, "green");
     Square s27 = new Square(27, "silver", 5);
 
-    //player object
+    //playerNumber object
     public static Player player;
 
     //create a square array with the game's squares - the board
     ArrayList<Square> gameSquares = new ArrayList<Square>(Arrays.asList(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27));
 
 
-    //static amount to take the amount displayed on the card and use it for updating player's amount of money
+    //static amount to take the amount displayed on the card and use it for updating playerNumber's amount of money
     public static int amount;
-    //static paid boolean to check if player has paid before being able to continue in various occasions
+    //static paid boolean to check if playerNumber has paid before being able to continue in various occasions
     public static boolean paid;
 
     int ownInterestCounter = 2;
@@ -205,7 +207,8 @@ public class GamePlayActivity extends AppCompatActivity {
 
     //for the naming of each group in the hashmap
     int groupNumber = 1;
-    String groupKey = "Group " + groupNumber;
+    int groupsNew = 1;
+    String groupKey = "group" +groupsNew;
 
     private int clientGroupNumber = 0;
 
@@ -220,15 +223,16 @@ public class GamePlayActivity extends AppCompatActivity {
         //initialising all variables
         initalisingWork();
 
-        //getting the player's pin number - whether it was assigned or created themselves
+        //getting the playerNumber's pin number - whether it was assigned or created themselves
         Intent intent = getIntent();
         String pinNumber = intent.getStringExtra("chosenpin");
 
-        //instantiating player
+        //instantiating playerNumber
         player = new Player(-1, pinNumber, 100, 0, 100, false);
 
         //all toolbar work
         setUpToolBar();
+
 
         //initalising for all JSON parsing
         requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -248,6 +252,7 @@ public class GamePlayActivity extends AppCompatActivity {
     public void initalisingWork() {
 
         toolbar = findViewById(R.id.toolbar);
+
 
         //initalising cards
         redCard = findViewById(R.id.redCardImg);
@@ -269,6 +274,7 @@ public class GamePlayActivity extends AppCompatActivity {
         removeCardBtn = findViewById(R.id.removeCardBtn);
         characterOnCard = findViewById(R.id.characterOnCard);
         groupNumberTextView = findViewById(R.id.groupNumber);
+        startWithdrawBtn = findViewById(R.id.startWithdrawBtn);
 
         //initalising buttons
         payWithCashBtn = findViewById(R.id.payByCashBtn);
@@ -341,7 +347,7 @@ public class GamePlayActivity extends AppCompatActivity {
                 //generate random number and animation for the dice image
                 rollDice();
 
-                //checking if the player has completed the board
+                //checking if the playerNumber has completed the board
                 if ((player.getPositionOnBoard() + diceNumber) >= (gameSquares.size() - 1)) {
                     Toast.makeText(GamePlayActivity.this, "Congratulations. You get a £50 reward for completing the board", Toast.LENGTH_SHORT).show();
                     //get £50 bonus for finishing first
@@ -351,11 +357,11 @@ public class GamePlayActivity extends AppCompatActivity {
                     completedBoardBtn.setVisibility(View.VISIBLE);
 
                 } else {
-                    //updating player's new position depending on value of dice
+                    //updating playerNumber's new position depending on value of dice
                     newPosition = player.getPositionOnBoard() + diceNumber;
                     player.setPositionOnBoard(newPosition);
 
-                    //setting clickability of cards depending on the colour that the player has landed on
+                    //setting clickability of cards depending on the colour that the playerNumber has landed on
                     switch (gameSquares.get(newPosition).getSquareColour()) {
                         //landed on red square
                         case "red":
@@ -402,16 +408,10 @@ public class GamePlayActivity extends AppCompatActivity {
                             blueCard.setEnabled(false);
                             yellowCard.setEnabled(false);
                             diceImg.setClickable(false);
-                            enterPinToWithdrawBtn.setVisibility(View.VISIBLE);
-                            withdrawBtn.setVisibility(View.VISIBLE);
-                            // withdrawBtn.setClickable(false);
-                            captionText.setText("Withdraw:");
-                            amountText.setText(String.valueOf(gameSquares.get(player.getPositionOnBoard()).getWithdrawalAmount()));
-                            blankCard.setVisibility(View.VISIBLE);
-                            poundSignText.setVisibility(View.VISIBLE);
-                            characterOnCard.setVisibility(View.VISIBLE);
-                            captionText.setVisibility(View.VISIBLE);
-                            amountText.setVisibility(View.VISIBLE);
+                            startWithdrawBtn.setVisibility(View.VISIBLE);
+                            startWithdrawBtn.setEnabled(true);
+
+
 
                     }
                 }
@@ -451,11 +451,11 @@ public class GamePlayActivity extends AppCompatActivity {
             }
         });
 
-        //player to pay with debit card
+        //playerNumber to pay with debit card
         payWithDebitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (paid) { //check if the player has already paid - stops glitches
+                if (paid) { //check if the playerNumber has already paid - stops glitches
                     Toast.makeText(GamePlayActivity.this, "You have already paid", Toast.LENGTH_SHORT).show();
                 } else if (amount > player.getDebitAmount()) {
                     Toast.makeText(GamePlayActivity.this, "You do not have enough for this payment", Toast.LENGTH_SHORT).show();
@@ -466,11 +466,11 @@ public class GamePlayActivity extends AppCompatActivity {
             }
         });
 
-        //player to pay with credit card
+        //playerNumber to pay with credit card
         payWithCreditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (paid) { //checking if player has already paid
+                if (paid) { //checking if playerNumber has already paid
                     Toast.makeText(GamePlayActivity.this, "You have already paid", Toast.LENGTH_SHORT).show();
                 } else {
                     payWithCredit();
@@ -478,7 +478,7 @@ public class GamePlayActivity extends AppCompatActivity {
             }
         });
 
-        //player to pay with cash
+        //playerNumber to pay with cash
         payWithCashBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -500,11 +500,11 @@ public class GamePlayActivity extends AppCompatActivity {
             }
         });
 
-        //button to remove card once player has paid
+        //button to remove card once playerNumber has paid
         removeCardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (paid) { //checking the player has paid
+                if (paid) { //checking the playerNumber has paid
                     setVisibilitiesForRemoveBtnClick();
                     toolBarAmounts(); //updating the values within the toolbar 'wallet'
                     //visibilities for finished turn
@@ -512,7 +512,7 @@ public class GamePlayActivity extends AppCompatActivity {
                     diceImg.setVisibility(View.INVISIBLE);
 
                 } else {
-                    //telling player they must pay first
+                    //telling playerNumber they must pay first
                     Toast.makeText(GamePlayActivity.this, "you must pay first", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -532,6 +532,25 @@ public class GamePlayActivity extends AppCompatActivity {
             }
         });
 
+        startWithdrawBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startWithdrawBtn.setEnabled(false);
+
+                enterPinToWithdrawBtn.setVisibility(View.VISIBLE);
+                withdrawBtn.setVisibility(View.VISIBLE);
+                captionText.setText("Withdraw:");
+                amountText.setText(String.valueOf(gameSquares.get(player.getPositionOnBoard()).getWithdrawalAmount()));
+                blankCard.setVisibility(View.VISIBLE);
+                poundSignText.setVisibility(View.VISIBLE);
+                characterOnCard.setVisibility(View.VISIBLE);
+                captionText.setVisibility(View.VISIBLE);
+                amountText.setVisibility(View.VISIBLE);
+
+                startWithdrawBtn.setVisibility(View.INVISIBLE);
+            }
+        });
+
         withdrawBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -543,7 +562,10 @@ public class GamePlayActivity extends AppCompatActivity {
                     blankCard.setVisibility(View.INVISIBLE);
                     captionText.setVisibility(View.INVISIBLE);
                     amountText.setVisibility(View.INVISIBLE);
+                    poundSignText.setVisibility(View.INVISIBLE);
+                    characterOnCard.setVisibility(View.INVISIBLE);
                     finishTurnBtn.setVisibility(View.VISIBLE);
+
                 } else {
                     Toast.makeText(GamePlayActivity.this, "Enter your pin first", Toast.LENGTH_SHORT).show();
                 }
@@ -583,17 +605,40 @@ public class GamePlayActivity extends AppCompatActivity {
         btnDiscover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mManager.discoverPeers(mChannel, new WifiP2pManager.ActionListener() {
-                    @Override
-                    public void onSuccess() {
-                        connectionStatus.setText("Discovery started");
-                    }
+                if (wifiManager.isWifiEnabled()) {
+                    mManager.discoverPeers(mChannel, new WifiP2pManager.ActionListener() {
+                        @Override
+                        public void onSuccess() {
+                            connectionStatus.setText("Discovery started");
+                        }
 
-                    @Override
-                    public void onFailure(int reason) {
-                        connectionStatus.setText("Discovery starting failed");
+                        @Override
+                        public void onFailure(int reason) {
+                            connectionStatus.setText("Discovery starting failed");
+                        }
+                    });
+                } else {
+                    Toast.makeText(GamePlayActivity.this, "Turning on wifi and discovering peers", Toast.LENGTH_LONG).show();
+
+
+                    wifiManager.setWifiEnabled(true);
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                });
+                    mManager.discoverPeers(mChannel, new WifiP2pManager.ActionListener() {
+                        @Override
+                        public void onSuccess() {
+                            connectionStatus.setText("Discovery started");
+                        }
+
+                        @Override
+                        public void onFailure(int reason) {
+                            connectionStatus.setText("Discovery starting failed");
+                        }
+                    });
+                }
             }
         });
 
@@ -634,6 +679,8 @@ public class GamePlayActivity extends AppCompatActivity {
                 //  groupKey = "Group "+groupNumber;
                 String msg = "group";
                 clientHandlerClass.createGameGroup(1, msg.getBytes());
+
+
             }
         });
 
@@ -729,7 +776,8 @@ public class GamePlayActivity extends AppCompatActivity {
 
     }
 
-    //handler object is needed to read messages sent between threads - allows for updating UI depending on message
+    //handler object is needed to read messages sent between threads
+    // - allows for updating UI depending on message
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -743,10 +791,14 @@ public class GamePlayActivity extends AppCompatActivity {
                     if (tempMsg.equals("group")) {
                         // Log.d(TAG, "handleMessage: group number = " +groupNumber);
                         Log.d(TAG, "handleMessage: groupKey " + groupKey);
-                        groupNumberTextView.setText("In Group");
+                        Log.d(TAG, "handleMessage: groupNumber: "+groupNumber);
+                        groupNumberTextView.setVisibility(View.VISIBLE);
+                        groupNumberTextView.setText("Group "+ groupNumber);
 
                     }
-                    //if start game message is sent (from server) then make it the first player/client in the clients list turn
+
+
+                    //if start game message is sent (from server) then make it the first playerNumber/client in the clients list turn
                     if (tempMsg.equals("start game")) {
                         turnTextView.setText("It is your turn");
                         turnTextView.setVisibility(View.VISIBLE);
@@ -758,7 +810,7 @@ public class GamePlayActivity extends AppCompatActivity {
                     if (tempMsg.equals("finished turn")) {
                         finishTurnBtn.setVisibility(View.INVISIBLE); //setting current client's button invisible
                         diceImg.setVisibility(View.INVISIBLE);
-                        //sending message straight on to next client IF current player hasn't completed board
+                        //sending message straight on to next client IF current playerNumber hasn't completed board
                         String message = "change turn";
                         clientHandlerClass.changeTurnHashMap(message.getBytes()); //automatically calling the change turn method so server does not have to click anything
 
@@ -868,17 +920,18 @@ public class GamePlayActivity extends AppCompatActivity {
             final InetAddress groupOwnerAddress = info.groupOwnerAddress;
 
             if (info.groupFormed && info.isGroupOwner) { //host server
-                connectionStatus.setText("Host");
+                connectionStatus.setText("Teacher Connected");
                 oneInGroupBtn.setVisibility(View.VISIBLE);
                 twoInGroupBtn.setVisibility(View.VISIBLE);
                 threeInGroupBtn.setVisibility(View.VISIBLE);
                 finishedCreatingGroupsBtn.setVisibility(View.VISIBLE);
                 selectPlayersTextView.setVisibility(View.VISIBLE);
                 toolbar.setVisibility(View.INVISIBLE);
+
                 serverClass = new ServerClass();
                 serverClass.start();
             } else if (info.groupFormed) { //client
-                connectionStatus.setText("Client Connected");
+                connectionStatus.setText("Pupil Connected");
                 Toast.makeText(getApplicationContext(), "Connected!", Toast.LENGTH_LONG).show();
                 //set up the game layout
                 btnDiscover.setVisibility(View.INVISIBLE);
@@ -932,9 +985,11 @@ public class GamePlayActivity extends AppCompatActivity {
      * initialsing and setting up the toolbar
      */
     public void setUpToolBar() {
-
         setSupportActionBar(toolbar);
+        //removes the title label from the toolbar across the top
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
         drawer = findViewById(R.id.drawer_layout);
+
 
         //   NavigationView navigationView = findViewById(R.id.nav_view);
         //   navigationView.setNavigationItemSelectedListener(this);
@@ -942,6 +997,8 @@ public class GamePlayActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+
 
         //calling method to get the amounts for the toolbar
         toolBarAmounts();
@@ -1025,7 +1082,7 @@ public class GamePlayActivity extends AppCompatActivity {
         ImageView monsterWalletImg = headerView.findViewById(R.id.monsterImgWallet);
         TextView monsterWalletName = headerView.findViewById(R.id.monsterNameWallet);
 
-        //getting the monster the player chose and setting it as the image
+        //getting the monster the playerNumber chose and setting it as the image
         if (monsterChosen == null) {
             monsterWalletImg.setImageResource(R.drawable.teacher_icon);
         } else {
@@ -1054,7 +1111,7 @@ public class GamePlayActivity extends AppCompatActivity {
         //random generator for dice
         Random random = new Random();
 
-        //set paid to false for the beginning of the player's turn
+        //set paid to false for the beginning of the playerNumber's turn
         paid = false;
 
         //create animation
@@ -1381,12 +1438,12 @@ public class GamePlayActivity extends AppCompatActivity {
     }
 
     /*
-     * checks if the player's pin is blocked. If not blocked, it opens a new dialog to ask for pin number
+     * checks if the playerNumber's pin is blocked. If not blocked, it opens a new dialog to ask for pin number
      * if pin is blocked, it opens a dialog to change pin
      */
     public void payWithDebit() {
         //paid is always false if this is clicked
-        //this is ok because this button can only ever be clicked IF the player has to pay
+        //this is ok because this button can only ever be clicked IF the playerNumber has to pay
         paid = false;
 
         if (!player.isPinBlocked()) {
@@ -1403,7 +1460,7 @@ public class GamePlayActivity extends AppCompatActivity {
     }
 
     /*
-     * checks if the player's pin is blocked. If not blocked, it opens a new dialog to ask for pin number
+     * checks if the playerNumber's pin is blocked. If not blocked, it opens a new dialog to ask for pin number
      * if pin is blocked, it opens a dialog to change pin
      */
     public void payWithCredit() {
@@ -1421,8 +1478,8 @@ public class GamePlayActivity extends AppCompatActivity {
     }
 
     /*
-     * Simple dialog built within method to ask for confirmation that they player wants to pay by cash
-     * Money deducted if player clicks yes
+     * Simple dialog built within method to ask for confirmation that they playerNumber wants to pay by cash
+     * Money deducted if playerNumber clicks yes
      */
     public void payWithCash() {
 
@@ -1477,7 +1534,7 @@ public class GamePlayActivity extends AppCompatActivity {
         paid = false;
 
         if (!player.isPinBlocked()) {
-            //if the withdrawal amount on the silver square > they player's debit amount
+            //if the withdrawal amount on the silver square > they playerNumber's debit amount
             if (gameSquares.get(player.getPositionOnBoard()).getWithdrawalAmount() > player.getDebitAmount()) {
                 cannotWithdrawBtn.setVisibility(View.VISIBLE);
                 withdrawBtn.setVisibility(View.INVISIBLE);
@@ -1502,13 +1559,13 @@ public class GamePlayActivity extends AppCompatActivity {
 
 
                     /*
-                    Toast.makeText(GamePlayActivity.this, "Withdrew £" +gameSquares.get(player.getPositionOnBoard()).getWithdrawalAmount(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GamePlayActivity.this, "Withdrew £" +gameSquares.get(playerNumber.getPositionOnBoard()).getWithdrawalAmount(), Toast.LENGTH_SHORT).show();
                     //minusing the withdrawal amount from the debit amount
-                    player.setDebitAmount(player.getDebitAmount() - gameSquares.get(player.getPositionOnBoard()).getWithdrawalAmount());
-                    Toast.makeText(GamePlayActivity.this, "new debit amount: "+player.getDebitAmount(), Toast.LENGTH_SHORT).show();
+                    playerNumber.setDebitAmount(playerNumber.getDebitAmount() - gameSquares.get(playerNumber.getPositionOnBoard()).getWithdrawalAmount());
+                    Toast.makeText(GamePlayActivity.this, "new debit amount: "+playerNumber.getDebitAmount(), Toast.LENGTH_SHORT).show();
                     //adding the withdrawal amount to the cash amount
-                    player.setCashAmount(player.getCashAmount() + gameSquares.get(player.getPositionOnBoard()).getWithdrawalAmount());
-                    Toast.makeText(GamePlayActivity.this, "new cash amount: "+player.getCashAmount(), Toast.LENGTH_SHORT).show();
+                    playerNumber.setCashAmount(playerNumber.getCashAmount() + gameSquares.get(playerNumber.getPositionOnBoard()).getWithdrawalAmount());
+                    Toast.makeText(GamePlayActivity.this, "new cash amount: "+playerNumber.getCashAmount(), Toast.LENGTH_SHORT).show();
                     toolBarAmounts();
                     withdrawBtn.setVisibility(View.INVISIBLE);
                     finishTurnBtn.setVisibility(View.VISIBLE);
@@ -1536,7 +1593,7 @@ public class GamePlayActivity extends AppCompatActivity {
     }
 
     /*
-     * Setting visibilitys for when Remove Card is clicked for the end of the player's turn
+     * Setting visibilitys for when Remove Card is clicked for the end of the playerNumber's turn
      */
     public void setVisibilitiesForRemoveBtnClick() {
 
@@ -1636,7 +1693,7 @@ public class GamePlayActivity extends AppCompatActivity {
         //for retreiving the ID of the client that sent the last message
         private int messageReceivedFromClientID;
 
-        int player = 0; //for the change player method - needs to be here as i don't want it to be set to 0 every time method is called
+        int playerNumber = 0; //for the change playerNumber method - needs to be here as i don't want it to be set to 0 every time method is called
 
         //constructor - accepts a socket and arraylist of clients that has been generated in the ServerClass
         public ClientHandler(Socket clientSocket, ArrayList<ClientHandler> clients, int clientID) {
@@ -1800,7 +1857,7 @@ public class GamePlayActivity extends AppCompatActivity {
 
                             //if the client index == the last client in this arraylist
                             if (indexOfCurrentClient == (sizeOfSpecificGroup - 1)) {
-                                //then set the next player to the fisrt client in the arraylist
+                                //then set the next playerNumber to the fisrt client in the arraylist
                                 nextPlayer = clientsInSpecificGroup.get(0);
                                 try {
                                     nextPlayer.out.write(bytes);
@@ -1809,7 +1866,7 @@ public class GamePlayActivity extends AppCompatActivity {
                                 }
                                 //   nextPlayer.write(bytes);
                             } else {
-                                //then set the next player to the next client in the list
+                                //then set the next playerNumber to the next client in the list
                                 nextPlayer = clientsInSpecificGroup.get(indexOfCurrentClient + 1);
                                 try {
 
@@ -1905,7 +1962,7 @@ public class GamePlayActivity extends AppCompatActivity {
 
 
         /*
-         * method to start the game by making it player 1's turn
+         * method to start the game by making it playerNumber 1's turn
          */
         public void startGame(byte[] bytes) {
             ClientHandler firstClient = clients.get(0);
@@ -1917,24 +1974,24 @@ public class GamePlayActivity extends AppCompatActivity {
         }
 
         /*
-         * checks what player number the player is and prepares a message to send to this client from the server
+         * checks what playerNumber number the playerNumber is and prepares a message to send to this client from the server
          */
         public void changeTurn(byte[] bytes) {
             int totalNumberOfClients = clients.size() - 1; //-1 because of array index
-            //the first player has already had their turn from the startGame method, so will be moving to player 2 which is index 1 of the arraylist
-            //going to the next player in the arraylist
+            //the first playerNumber has already had their turn from the startGame method, so will be moving to playerNumber 2 which is index 1 of the arraylist
+            //going to the next playerNumber in the arraylist
 
-            Log.d(TAG, "player number in list: before increment " + player);
+            Log.d(TAG, "playerNumber number in list: before increment " + playerNumber);
 
-            //making sure the player number isn't bigger than the arraylist size
-            if (player == (totalNumberOfClients)) {
-                player = 0; //go back to the first player (first client in arraylist)
+            //making sure the playerNumber number isn't bigger than the arraylist size
+            if (playerNumber == (totalNumberOfClients)) {
+                playerNumber = 0; //go back to the first playerNumber (first client in arraylist)
             } else {
-                player++;
+                playerNumber++;
             }
 
             //create the current Client and prepared an output stream to be sent to the client's inputstream
-            ClientHandler currentClient = clients.get(player);
+            ClientHandler currentClient = clients.get(playerNumber);
             try {
                 currentClient.out.write(bytes);
             } catch (IOException e) {

@@ -39,13 +39,14 @@ public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
                 Toast.makeText(context, "Wifi is OFF", Toast.LENGTH_SHORT).show();
             }
 
-        } else if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) { //indicates that the available peer list has changed
+            //indicates that the available peer list has changed
+        } else if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
             //get a list of peers by calling WifiP2pManager.requestPeers()
             if (mManager!=null) {
                 mManager.requestPeers(mChannel, mActivity.peerListListener);  //pass in peerListListener from mainActivity
             }
-
-        } else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) { //indicates the state of the wifi p2p connectivity has changed
+            //indicates the state of the wifi p2p connectivity has changed
+        } else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
             //respond to a new connection or disconnections
             if (mManager == null) {
                 return;

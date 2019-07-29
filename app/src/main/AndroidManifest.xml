@@ -15,7 +15,8 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
 
         <activity android:name=".GameEndedActivity"></activity>
         <activity android:name=".ViewRemovedCards" />
@@ -38,6 +39,7 @@
         <activity
             android:name=".GamePlayActivity"
             android:configChanges="orientation|screenSize"
+
             android:screenOrientation="portrait"/>
         <activity android:name=".PupilHome" />
         <activity android:name=".MainActivity">

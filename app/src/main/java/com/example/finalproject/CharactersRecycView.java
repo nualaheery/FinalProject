@@ -72,7 +72,6 @@ public class CharactersRecycView extends AppCompatActivity implements RecyclerVi
 
         //call method to convert the read data into objects
         converJSONToObject(builder.toString());
-
     }
 
     public void converJSONToObject(String s) {

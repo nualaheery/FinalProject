@@ -11,6 +11,7 @@ public class Player {
     private double cashAmount;
     private boolean pinBlocked;
 
+
     public Player() {
 
     }
@@ -22,6 +23,7 @@ public class Player {
         this.creditAmount = creditAmount;
         this.cashAmount = cashAmount;
         this.pinBlocked = pinBlocked;
+
 
     }
 
@@ -72,6 +74,7 @@ public class Player {
     public void setPinBlocked(boolean pinBlocked) {
         this.pinBlocked = pinBlocked;
     }
+
 
 
 }

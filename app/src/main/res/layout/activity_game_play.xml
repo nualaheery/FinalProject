@@ -28,7 +28,8 @@
             android:background="#F5930F"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:title="">
 
 
         </android.support.v7.widget.Toolbar>
@@ -132,8 +133,8 @@
 
         <TextView
             android:id="@+id/cardCaptionText"
-            android:layout_width="217dp"
-            android:layout_height="98dp"
+            android:layout_width="225dp"
+            android:layout_height="123dp"
             android:layout_marginTop="224dp"
             android:text="Card Caption"
             android:textSize="24sp"
@@ -297,7 +298,8 @@
             android:layout_marginTop="64dp"
             android:text="Wifi On"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="invisible"/>
 
         <Button
             android:id="@+id/discover"
@@ -306,9 +308,11 @@
             android:layout_alignBaseline="@+id/onOff"
             android:layout_alignBottom="@+id/onOff"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="268dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="64dp"
-            android:text="discover"
+            android:layout_marginEnd="8dp"
+            android:text="discover nearby devices"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -614,6 +618,20 @@
             android:text="Group Number"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:visibility="invisible"/>
+
+        <Button
+            android:id="@+id/startWithdrawBtn"
+            android:layout_width="187dp"
+            android:layout_height="127dp"
+            android:text="Withdraw cash"
+            app:layout_constraintBottom_toBottomOf="@+id/pauseScreen"
+            app:layout_constraintEnd_toEndOf="@+id/pauseScreen"
+            app:layout_constraintStart_toStartOf="@+id/pauseScreen"
+            app:layout_constraintTop_toTopOf="@+id/pauseScreen"
             android:visibility="invisible"/>
 
 
